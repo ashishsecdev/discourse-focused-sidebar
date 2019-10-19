@@ -1,0 +1,13 @@
+<script type="text/discourse-plugin" version="0.8">
+  api.onPageChange((url, title) => {
+     if (url == "/tags"){
+       document
+         .querySelector("body")
+         .classList.add("tags-index");
+     } else {
+       document
+         .querySelector("body")
+         .classList.remove("tags-index");
+     }
+   });
+</script>

@@ -4,3 +4,8 @@ sidebar-alignment:
   choices:
     - left
     - right
+
+svg_icons:
+  default: "angle-left"
+  type: "list"
+  list_type: "compact"

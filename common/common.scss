@@ -1,13 +1,15 @@
+.shortcut-nav {
+  display: none;
+  max-width: 180px;
+  margin-bottom: 1em;
+}
+
 // Only applying to main topic lists over 768px wide
 @media screen and (min-width: 768px) {
   .navigation-topics,
   .categories-list,
-  .tags-page,
+  .tags-page:not(.tags-index),
   body[class*="category-"]:not(.archetype-regular):not(.archetype-banner) {
-    #main-outlet {
-      padding-top: 6.8572em;
-    }
-
     // Structuring the main grid layout
 
     .container:first-of-type {
@@ -78,9 +80,11 @@
     .list-controls {
       z-index: 100; // Above topic list content
       .container {
+        /*
         position: -webkit-sticky; // required for Safari
         position: sticky;
         top: 5.8572em; // required for sticky
+        */
       }
 
       .btn {
@@ -152,6 +156,11 @@
       .navigation-container {
         display: flex;
         flex-wrap: wrap;
+
+        .btn {
+          // prevents visual size reshuffle
+          transition: background-color 0.25s, color 0.25s;
+        }
       }
       ol {
         display: flex;
@@ -187,5 +196,101 @@
         }
       }
     }
+  }
+
+  // Shortcut nav styling
+
+  .shortcut-nav {
+    width: 100%;
+    display: block;
+  }
+
+  .list-controls ol {
+    display: none !important;
+  }
+
+  .category-heading {
+    display: none;
+  }
+
+  .custom-home-link,
+  .custom-home-link:visited {
+    display: block;
+    color: $primary-high;
+    margin-bottom: 1.25em;
+    text-transform: capitalize;
+    .d-icon {
+      color: $primary-medium;
+    }
+  }
+
+  .custom-nav-list {
+    margin-bottom: 1em;
+    h3 {
+      display: flex;
+      width: 100%;
+      border-bottom: 1px solid $primary-low;
+      font-size: 1em;
+      text-transform: uppercase;
+      margin: 0;
+      a {
+        display: flex;
+        flex: 0 1 auto;
+        padding: 0.25em;
+        margin-bottom: 0.15em;
+        align-self: flex-start;
+        &:hover {
+          background: $tertiary-low;
+        }
+      }
+      .d-icon {
+        font-size: 0.87em;
+        color: $primary-medium;
+        padding: 0.25em;
+        align-self: flex-start;
+      }
+      .all-link {
+        margin-right: auto;
+        color: $primary;
+      }
+    }
+    ul {
+      list-style-type: none;
+      margin: 0.5em 0;
+    }
+
+    li {
+      &:hover {
+        background: $tertiary-low;
+      }
+      a {
+        padding: 0.35em;
+        display: block;
+        color: $primary-high;
+      }
+    }
+    .custom-current {
+      background: $tertiary-low;
+    }
+
+    &.custom-tag-list {
+      li {
+        font-size: 0.875em;
+      }
+    }
+    &.custom-assign-list {
+      li a {
+        font-size: 0.875em;
+        white-space: nowrap;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  #navigation-bar {
+    // on the fence about this
+    display: none;
   }
 }
