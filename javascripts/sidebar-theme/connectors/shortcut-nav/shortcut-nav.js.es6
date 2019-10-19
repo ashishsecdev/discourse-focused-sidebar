@@ -12,7 +12,6 @@ export default {
     }
 
     function checkElement(selector) {
-      // Check if element exists
       if (document.querySelector(selector) === null) {
         return checkAsync().then(() => checkElement(selector));
       } else {
@@ -88,9 +87,7 @@ export default {
           const controller = container.lookup("controller:navigation/category");
           let currentCategory = controller.get("category.slug");
           var categoryClass = ".custom-tracking-nav li." + currentCategory;
-
           setCurrent(categoryClass);
-
           component.set("back", true);
         } else if (url.match(/^\/tags\/(.*)/)) {
           // If tag, lookup which
@@ -104,7 +101,7 @@ export default {
           checkElement(".custom-tracking-nav li.custom-current").then(
             element => {
               document
-                .querySelector(".custom-tracking-nav li")
+                .querySelector(".custom-tracking-nav li.custom-current")
                 .classList.remove("custom-current");
             }
           );
