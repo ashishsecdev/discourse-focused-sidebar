@@ -128,13 +128,38 @@
     }
 
     li {
+      display: flex;
+      align-items: baseline;
+
+      .badge-wrapper {
+        span.badge-category {
+          max-width: 100px;
+        }
+      }
+
       &:hover {
         background: $tertiary-low;
       }
       a {
         padding: 0.35em;
-        display: block;
+        display: inline-block;
         color: $primary-high;
+      }
+      .unread-new {
+        margin-left: auto;
+        .badge-notification.new-posts {
+          background: transparent;
+          padding: 0 0.25 0 0;
+          color: $tertiary-high;
+          &:before {
+            content: "•";
+            display: inline-block;
+            height: 20px;
+            vertical-align: middle;
+            font-size: 2em;
+            margin-right: 0.05em;
+          }
+        }
       }
     }
     .custom-current {

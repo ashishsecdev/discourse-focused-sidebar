@@ -8,7 +8,8 @@
 
         <ul>
           {{#each trackedCats as |c|}}
-            <li class={{c.slug}}>{{category-link c}}</li>
+            <li class={{c.slug}}>{{category-link c}}  {{category-unread category=c tagName="div" class="unread-new"}}           
+</li>
           {{/each}}
         </ul>
         {{/if}}
