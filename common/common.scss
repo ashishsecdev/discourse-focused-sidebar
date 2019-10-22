@@ -76,6 +76,10 @@
   .shortcut-nav {
     width: 100%;
     display: block;
+
+
+    .badge.new-posts.badge-notification:last-of-type:not(:first-of-type) {
+      display: none;
   }
 
   .custom-home-link,
