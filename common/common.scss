@@ -77,7 +77,7 @@
     width: 100%;
     display: block;
 
-    .badge.new-posts.badge-notification:last-of-type:not(:first-of-type) {
+    .badge.new-posts.badge-notification:first-of-type:not(:last-of-type) {
       display: none;
     }
   }
@@ -202,6 +202,20 @@
 
 h2.custom-page-title {
   margin-bottom: 0.5em;
+}
+
+h3.custom-page-parent-title {
+  font-size: 0.875em;
+  font-weight: normal;
+  margin-bottom: 0;
+  a {
+    color: $primary-high;
+  }
+  .d-icon {
+    color: $primary-medium;
+    font-size: 0.875em;
+    margin-right: 0.25em;
+  }
 }
 
 // Category nav

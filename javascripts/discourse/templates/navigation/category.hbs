@@ -2,7 +2,13 @@
   {{add-category-tag-classes category=category}}
 
   <section class='category-heading'>
+    {{#if category.parentCategory}}
+      <h3 class="custom-page-parent-title">
+        <a href="/c/{{category.parentCategory.slug}}">{{d-icon "level-up-alt"}}{{category.parentCategory.name}}</a>
+      </h3>
+    {{/if}}
     <h2 class="custom-page-title">
+      {{log category}}
       {{category.name}}
     </h2>
     {{#if category.uploaded_logo.url}}
