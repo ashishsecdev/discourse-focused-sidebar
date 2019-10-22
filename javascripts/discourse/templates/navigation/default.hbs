@@ -1,0 +1,11 @@
+<h2 class="custom-page-title">
+  All categories{{#if siteSettings.tagging_enabled}} & tags{{/if}}
+</h2>
+
+{{#d-section bodyClass="navigation-topics" class="navigation-container" scrollTop="false"}}
+  {{d-navigation
+    filterMode=filterMode
+    canCreateTopic=canCreateTopic
+    hasDraft=draft
+    createTopic=(route-action "createTopic")}}
+{{/d-section}}

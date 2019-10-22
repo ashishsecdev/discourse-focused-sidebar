@@ -6,6 +6,6 @@ sidebar-alignment:
     - right
 
 svg_icons:
-  default: "angle-left"
+  default: "level-up-alt"
   type: "list"
   list_type: "compact"

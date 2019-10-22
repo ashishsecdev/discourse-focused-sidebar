@@ -34,7 +34,7 @@
 
     #main-outlet {
       display: grid;
-      grid-column-gap: 1.5em;
+      grid-column-gap: 2.5em;
 
       @if $sidebar-alignment == "left" {
         grid-template-columns: 2fr 10fr; // 12 column grid
@@ -84,6 +84,9 @@
     color: $primary-high;
     margin-bottom: 1.25em;
     text-transform: capitalize;
+    border-top: 1px solid $primary-low;
+    padding-top: 1.5em;
+    font-size: 0.875em;
     .d-icon {
       color: $primary-medium;
     }
@@ -95,7 +98,7 @@
       display: flex;
       width: 100%;
       border-bottom: 1px solid $primary-low;
-      font-size: 1em;
+      font-size: 0.875em;
       text-transform: uppercase;
       margin: 0;
       a {
@@ -165,8 +168,32 @@
 
 // Category headers
 
-#list-area .custom-category-header {
-  h2 {
-    margin: 0 0 1em 0;
+h2.custom-page-title {
+  margin-bottom: 0.5em;
+}
+
+// Category nav
+
+.list-controls .nav {
+  margin-bottom: 2em;
+}
+
+.navigation-container {
+  .nav-pills > li > a {
+    padding: 6px 0;
+    margin-right: 0.5em;
+    color: $primary;
+    border-bottom: 3px solid transparent;
+    transition: all 0.25s;
+
+    &.active {
+      color: $danger;
+      background: transparent;
+      border-bottom: 3px solid $danger;
+    }
+    &:not(.active):hover {
+      background: transparent;
+      border-bottom: 3px solid $danger;
+    }
   }
 }
