@@ -20,8 +20,12 @@
       grid-area: pins;
     }
 
-    .list-controls {
+    .shortcut-nav-outlet {
       grid-area: nav;
+    }
+
+    .list-controls {
+      grid-area: above-topic-list;
     }
 
     .list-container {
@@ -37,6 +41,7 @@
         grid-template-areas:
           "alerts alerts"
           "pins pins"
+          "nav above-topic-list"
           "nav topic-list";
       } @else {
         grid-template-columns: 10fr 2fr;
@@ -44,22 +49,6 @@
           "alerts alerts"
           "pins pins"
           "topic-list nav";
-      }
-    }
-
-    // Changing the layout to fit the grid
-
-    .category-breadcrumb {
-      font-size: 1.1487em;
-      .badge-wrapper.bullet .badge-category-parent-bg,
-      .badge-wrapper.bullet .badge-category-bg {
-        width: 10px;
-        height: 10px;
-      }
-
-      .select-kit.combo-box.category-drop .select-kit-row .badge-wrapper.box {
-        font-weight: normal;
-        padding: 4px 6px;
       }
     }
 
@@ -76,126 +65,10 @@
     .top-topic-list .table-heading {
       padding-top: 0;
     }
-
-    .list-controls {
-      z-index: 100; // Above topic list content
-      .container {
-        /*
-        position: -webkit-sticky; // required for Safari
-        position: sticky;
-        top: 5.8572em; // required for sticky
-        */
-      }
-
-      .btn {
-        margin: 0;
-      }
-
-      #create-topic {
-        flex: 1 1 auto;
-        order: 6;
-        margin-top: 0.5em;
-      }
-
-      button {
-        order: 6;
-      }
-      .notifications-button {
-        order: 5;
-        margin-right: 0.5em;
-        margin-top: 0.5em;
-      }
-
-      .edit-category {
-        flex: 1 1 auto;
-        margin-top: 0.5em;
-      }
-
-      .categories-admin-dropdown {
-        order: 8;
-        margin-bottom: 0;
-        margin-left: 0.5em;
-        margin-top: 0.5em;
-        button {
-          height: 2em;
-        }
-      }
-
-      .nav-pills {
-        display: flex;
-        flex: 1 1 100%;
-        flex-direction: column;
-        margin: 0.5em 0;
-        li {
-          margin: 0;
-          &:empty {
-            display: none;
-          }
-        }
-        & > li > a {
-          padding: 0.5em 0.714em;
-        }
-        @if $sidebar-alignment == left {
-          & > li.active > a {
-            &:after {
-              content: "\f178";
-              font-family: fontawesome;
-              display: inline;
-              margin-left: auto;
-            }
-          }
-        }
-      }
-      .select-kit-header {
-        span.category-name {
-          max-width: 8.5em;
-        }
-      }
-
-      .category-navigation,
-      .navigation-container {
-        display: flex;
-        flex-wrap: wrap;
-
-        .btn {
-          // prevents visual size reshuffle
-          transition: background-color 0.25s, color 0.25s;
-        }
-      }
-      ol {
-        display: flex;
-        flex-wrap: wrap;
-        flex: 1 1 auto;
-        margin: 0;
-        li.category-drop,
-        li.tag-drop {
-          margin: 0;
-          flex: 1 1 100%;
-          &:not(:first-of-type) {
-            margin: 0.5em 0 0 0;
-          }
-        }
-      }
-
-      .select-kit .select-kit-header .caret-icon {
-        &:before {
-          content: "\f0d7";
-        }
-      }
-    }
   }
 
-  .tags-page.staff {
-    .list-controls {
-      .admin-tag {
-        order: 9;
-        flex: 1 1 auto;
-        margin-top: 0.5em;
-        &.btn-danger {
-          margin-left: 0.5em;
-        }
-      }
-    }
+  ol.category-breadcrumb {
+    display: none;
   }
 
   // Shortcut nav styling
@@ -203,14 +76,6 @@
   .shortcut-nav {
     width: 100%;
     display: block;
-  }
-
-  .list-controls ol {
-    display: none !important;
-  }
-
-  .category-heading {
-    display: none;
   }
 
   .custom-home-link,
@@ -288,9 +153,20 @@
       }
     }
   }
+}
 
-  #navigation-bar {
-    // on the fence about this
-    display: none;
+.custom-empty-message {
+  font-size: 0.875em;
+  p {
+    margin-top: 1em;
+    padding: 0 0.25em;
+  }
+}
+
+// Category headers
+
+#list-area .custom-category-header {
+  h2 {
+    margin: 0 0 1em 0;
   }
 }

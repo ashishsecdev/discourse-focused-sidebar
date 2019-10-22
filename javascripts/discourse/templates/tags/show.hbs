@@ -1,12 +1,12 @@
 <div class="container">
   {{discourse-banner user=currentUser banner=site.banner}}
 </div>
+{{plugin-outlet name="shortcut-nav" tagName=""}}
 
 <div class="list-controls">
   <div class="container">
     <section class="navigation-container">
-      {{plugin-outlet name="shortcut-nav" tagName=""}}
-
+<h2>{{tag.id}}</h2>
     {{#if showTagFilter}}
       {{bread-crumbs categories=categories
                      category=category

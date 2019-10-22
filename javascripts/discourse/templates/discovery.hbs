@@ -2,9 +2,17 @@
   {{discourse-banner user=currentUser banner=site.banner}}
 </div>
 
+
+{{plugin-outlet name="shortcut-nav" tagName=""}}
+
+
 <div class="list-controls">
+
+
+
+
+
   <div class="container">
-    {{plugin-outlet name="shortcut-nav" tagName=""}}
     {{outlet "navigation-bar"}}
   </div>
 </div>
