@@ -155,7 +155,7 @@
         margin-left: auto;
         .badge-notification.new-posts {
           background: transparent;
-          padding: 0 0.25 0 0;
+          padding: 0 0.25 0 0 !important;
           color: $tertiary-high;
           &:before {
             content: "•";
