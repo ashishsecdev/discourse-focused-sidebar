@@ -144,10 +144,12 @@
       &:hover {
         background: $tertiary-low;
       }
-      a {
+      > a {
         padding: 0.35em;
-        display: inline-block;
+        display: flex;
+        align-items: center;
         color: $primary-high;
+        width: 100%;
       }
       .unread-new {
         margin-left: auto;
@@ -182,6 +184,7 @@
         max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
+        display: block;
       }
     }
   }
