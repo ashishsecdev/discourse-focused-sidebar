@@ -5,30 +5,13 @@ const container = Discourse.__container__;
 
 export default {
   setupComponent(args, component) {
-    function checkAsync() {
-      return new Promise(resolve => {
-        requestAnimationFrame(resolve);
-      });
-    }
+    const filterMode = "sidebar";
+    const navItems = Discourse.NavItem.buildList(null, { filterMode });
 
-    function checkElement(selector) {
-      if (document.querySelector(selector) === null) {
-        return checkAsync().then(() => checkElement(selector));
-      } else {
-        return Promise.resolve(true);
-      }
-    }
-
-    function setCurrent(item) {
-      // Set class if current page
-      checkElement(item).then(element => {
-        document
-          .querySelectorAll(".custom-tracking-nav li")
-          .forEach(e => e.classList.remove("custom-current"));
-
-        document.querySelector(item).classList.add("custom-current");
-      });
-    }
+    this.setProperties({
+      navItems,
+      filterMode
+    });
 
     withPluginApi("0.1", api => {
       api.onPageChange((url, title) => {
@@ -81,32 +64,6 @@ export default {
             );
           }
         });
-
-        if (url.match(/^\/c\/(.*)/)) {
-          // If category, lookup which
-          const controller = container.lookup("controller:navigation/category");
-          let currentCategory = controller.get("category.slug");
-          var categoryClass = ".custom-tracking-nav li." + currentCategory;
-          setCurrent(categoryClass);
-          component.set("back", true);
-        } else if (url.match(/^\/tags\/(.*)/)) {
-          // If tag, lookup which
-          const controller = container.lookup("controller:tags");
-          let currentTag = controller.get("target.currentRoute.params.tag_id");
-          var tagClass = ".custom-tracking-nav li." + currentTag;
-          setCurrent(tagClass);
-          component.set("back", true);
-        } else {
-          // If not, remove current class
-          checkElement(".custom-tracking-nav li.custom-current").then(
-            element => {
-              document
-                .querySelector(".custom-tracking-nav li.custom-current")
-                .classList.remove("custom-current");
-            }
-          );
-          component.set("back", false);
-        }
       });
     });
   }

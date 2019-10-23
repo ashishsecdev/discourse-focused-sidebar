@@ -2,13 +2,19 @@
   <div class="custom-tracking-nav">
 
 
+    <div class="custom-nav-list custom-global-list">
+      <h3><a class="all-link" href="/">All topics</a></h3>
+
+    {{navigation-bar navItems=navItems filterMode=filterMode category=category id="global-sidebar-nav"}}
+
+</div>
       <div class="custom-nav-list custom-category-list">
         <h3><a class="all-link" href="/categories">Categories</a> <a href="/my/preferences/categories">{{d-icon "pencil"}}</a> </h3>
         {{#if trackedCats}}
 
         <ul>
           {{#each trackedCats as |c|}}
-            <li class={{c.slug}}><a href="/c/{{c.slug}}">{{category-link c}}  {{category-unread category=c tagName="div" class="unread-new"}}     </a>      
+            <li class={{c.slug}}><a href="/c/{{c.slug}}">{{category-link c}}  {{category-unread category=c tagName="div" class="unread-new"}}     </a>
 </li>
           {{/each}}
         </ul>
@@ -48,8 +54,6 @@
     </div>
 
     {{/if}}
-    {{#if back}}
-      <a href="/latest" class="custom-home-link">{{d-icon "level-up-alt"}} All latest topics </a>
-    {{/if}}
+
   </div>
 </div>

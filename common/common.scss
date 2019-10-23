@@ -22,6 +22,12 @@
 
     .shortcut-nav-outlet {
       grid-area: nav;
+      .tracked-categories {
+        position: sticky;
+        top: 5.5em;
+        max-height: 70vh;
+        overflow: auto;
+      }
     }
 
     .list-controls {
@@ -147,24 +153,18 @@
       > a {
         padding: 0.35em;
         display: flex;
-        align-items: center;
+        align-items: baseline;
         color: $primary-high;
         width: 100%;
       }
       .unread-new {
         margin-left: auto;
         .badge-notification.new-posts {
+          display: flex;
+          align-items: center;
           background: transparent;
           padding: 0 0.25 0 0 !important;
           color: $tertiary-high;
-          &:before {
-            content: "•";
-            display: inline-block;
-            height: 20px;
-            vertical-align: middle;
-            font-size: 2em;
-            margin-right: 0.05em;
-          }
         }
       }
     }
@@ -240,6 +240,38 @@ h3.custom-page-parent-title {
     &:not(.active):hover {
       background: transparent;
       border-bottom: 3px solid $danger;
+    }
+  }
+}
+
+body:not([class*="category-"]) {
+  #navigation-bar {
+    display: none;
+  }
+}
+
+li[title="all topics grouped by category"] {
+  display: none;
+}
+
+#global-sidebar-nav {
+  > li > a {
+    min-height: unset;
+    line-height: 1.4;
+    &:hover {
+      background: $tertiary-low;
+      color: $primary-high;
+    }
+  }
+  li {
+    font-size: 0.765rem;
+    display: block;
+    width: 100%;
+    &.hidden {
+      display: none;
+    }
+    &[title="all topics grouped by category"] {
+      display: none;
     }
   }
 }
