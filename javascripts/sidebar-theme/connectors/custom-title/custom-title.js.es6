@@ -7,8 +7,14 @@ export default {
         if (component.isDestroying && component.isDestroyed) {
           return false;
         }
-        const path = window.location.pathname.replace(/\//g, "");
-        component.set("path", path);
+        var path = window.location.pathname.replace(/\//g, "");
+
+        if (path === "bookmarks") {
+          path = I18n.t(themePrefix("page_titles.bookmarked"));
+          component.set("path", path);
+        } else {
+          component.set("path", path);
+        }
       });
     });
   }
