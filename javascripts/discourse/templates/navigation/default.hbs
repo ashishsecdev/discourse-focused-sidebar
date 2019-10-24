@@ -1,5 +1,5 @@
 <h2 class="custom-page-title">
-  All categories{{#if siteSettings.tagging_enabled}} & tags{{/if}}
+  {{plugin-outlet name="custom-title" args=(hash category=category)}}
 </h2>
 
 {{#d-section bodyClass="navigation-topics" class="navigation-container" scrollTop="false"}}

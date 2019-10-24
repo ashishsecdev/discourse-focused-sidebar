@@ -1,0 +1,14 @@
+
+    {{#if category.parentCategory}}
+      <h3 class="custom-page-parent-title">
+        <a href="/c/{{category.parentCategory.slug}}">{{d-icon "level-up-alt"}}{{category.parentCategory.name}}</a>
+      </h3>
+    {{/if}}
+    {{#if category}}
+    <h2 class="custom-page-title">
+      {{category.name}}
+    </h2>
+    {{/if}}
+    {{#unless category}}
+    All {{#if path}}{{path}}{{/if}} topics
+    {{/unless}}

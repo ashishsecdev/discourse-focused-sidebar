@@ -206,6 +206,9 @@
       display: none;
     }
   }
+  td.main-link {
+    padding-right: 1em;
+  }
 }
 
 // Category headers
@@ -230,7 +233,7 @@ h3.custom-page-parent-title {
 
 // tags
 
-.tags-page {
+.tags-page:not(.tags-index) {
   .list-controls {
     .navigation-container {
       display: flex;
@@ -239,18 +242,18 @@ h3.custom-page-parent-title {
 }
 
 // Category nav
-
-.list-controls .container {
-  display: flex;
-  .navigation-container {
-    width: 100%;
-  }
-  h2 {
-    margin-right: auto;
-    white-space: nowrap;
+body:not(.tags-index) {
+  .list-controls .container {
+    display: flex;
+    .navigation-container {
+      width: 100%;
+    }
+    h2 {
+      margin-right: auto;
+      white-space: nowrap;
+    }
   }
 }
-
 .list-controls .nav {
   margin-bottom: 2em;
 }
