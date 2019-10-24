@@ -44,6 +44,7 @@
 
       @if $sidebar-alignment == "left" {
         grid-template-columns: 2fr 10fr; // 12 column grid
+        grid-template-rows: auto auto auto 1fr;
         grid-template-areas:
           "alerts alerts"
           "pins pins"
@@ -195,6 +196,15 @@
   p {
     margin-top: 1em;
     padding: 0 0.25em;
+  }
+}
+
+.topic-list {
+  .posters {
+    width: 60px;
+    a:not(:first-of-type):not(:last-of-type) {
+      display: none;
+    }
   }
 }
 
