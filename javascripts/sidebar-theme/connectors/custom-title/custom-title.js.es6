@@ -7,7 +7,6 @@ export default {
         if (component.isDestroying && component.isDestroyed) {
           return false;
         }
-
         const path = window.location.pathname.replace(/\//g, "");
         component.set("path", path);
       });

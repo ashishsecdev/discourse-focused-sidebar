@@ -242,6 +242,13 @@ h3.custom-page-parent-title {
 }
 
 // Category nav
+
+body.categories-list {
+  .navigation-container {
+    display: flex;
+  }
+}
+
 body:not(.tags-index) {
   .list-controls .container {
     display: flex;
@@ -254,6 +261,7 @@ body:not(.tags-index) {
     }
   }
 }
+
 .list-controls .nav {
   margin-bottom: 2em;
 }
