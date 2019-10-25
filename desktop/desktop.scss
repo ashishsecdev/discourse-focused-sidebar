@@ -350,6 +350,10 @@ li[title="all topics grouped by category"] {
       padding-top: 0;
     }
 
+    .loading-container {
+      grid-area: topic;
+    }
+
     .container.posts {
       grid-area: topic;
       display: grid;
@@ -413,10 +417,6 @@ li[title="all topics grouped by category"] {
 
 // welcome to hacktown
 
-.alert {
-  display: none;
-}
-
 #list-area {
   padding-top: 0.6em;
 }
@@ -429,30 +429,31 @@ li[title="all topics grouped by category"] {
   box-shadow: none;
   background: transparent;
   pointer-events: none;
-  .extra-info-wrapper,
+  height: 6em;
+  .d-header-icons {
+    background: $secondary;
+    padding: 0.5em;
+  }
   .title {
     display: none;
   }
   .panel {
     pointer-events: all;
-    margin-top: 1.75em;
   }
   .wrap {
     max-width: 1200px;
   }
+  .extra-info-wrapper {
+    margin-left: 15em;
+    background: $secondary;
+    .title-wrapper {
+      padding-top: 0;
+    }
+  }
 }
 
-#topic-title {
-  position: sticky;
-  top: 0;
-  background: $secondary;
-  z-index: 999;
-  padding-top: 1.5em !important;
-  margin-right: 9em;
-  .title-wrapper {
-    width: 80%;
-  }
-  padding-bottom: 1em;
+.title-wrapper {
+  padding-top: 1.5em;
 }
 
 .tracked-categories {
@@ -497,6 +498,11 @@ li[title="all topics grouped by category"] {
   max-width: 1200px;
 }
 
+#main-outlet > .regular .container.posts > .row,
+#main-outlet > .banner .container.posts > .row {
+  max-width: 830px;
+}
+
 #main-outlet > .regular > span .topic-sidebar,
 #main-outlet > .banner > span .topic-sidebar {
   top: 0em;
@@ -505,4 +511,67 @@ li[title="all topics grouped by category"] {
 #main-outlet > .regular .container.posts > div:not(.selected-posts):not(.row),
 #main-outlet > .banner .container.posts > div:not(.selected-posts):not(.row) {
   top: 6.75em;
+}
+
+// User profile
+
+.alert.alert-info {
+  display: none;
+}
+
+body[class*="user-"] {
+  #main-outlet {
+    display: grid;
+    grid-template-areas:
+      "alerts alerts"
+      "sidebar profile";
+    grid-column-gap: 2.5em;
+    > span {
+      grid-area: alerts;
+      display: none;
+    }
+    .profile-sidebar {
+      grid-area: sidebar;
+    }
+    .container:not(:first-of-type) {
+      grid-area: profile;
+      align-self: start;
+    }
+    .container:first-of-type {
+      grid-area: alerts;
+    }
+  }
+  .shortcut-nav-outlet {
+    position: sticky;
+    top: 0;
+  }
+  .collapsed-info + .user-content-wrapper .user-primary-navigation {
+    position: sticky;
+    top: 7.2em;
+    background: $secondary;
+    z-index: 999;
+  }
+  .user-main {
+    background: $secondary;
+  }
+  .user-main .about {
+    margin-bottom: 0 !important;
+    padding-bottom: 1em;
+    padding-top: 2em;
+  }
+
+  .collapsed-info {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: $secondary;
+
+    .primary-textual {
+      padding-bottom: 1em !important;
+    }
+
+    .controls {
+      margin-right: 10em;
+    }
+  }
 }
