@@ -1,1 +1,1 @@
-# discourse-focus-sidebar
+# discourse-focused-sidebar
