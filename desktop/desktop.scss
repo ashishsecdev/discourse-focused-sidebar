@@ -327,7 +327,7 @@ li[title="all topics grouped by category"] {
   #main-outlet > .banner {
     display: grid;
     grid-template-columns: 2fr 10fr;
-    grid-column-gap: 2em;
+    grid-column-gap: 2.5em;
     grid-template-areas:
       "sidebar title"
       "sidebar topic";
@@ -409,4 +409,100 @@ li[title="all topics grouped by category"] {
       }
     }
   }
+}
+
+// welcome to hacktown
+
+.alert {
+  display: none;
+}
+
+#list-area {
+  padding-top: 0.6em;
+}
+
+#main-outlet {
+  padding-top: 0;
+}
+
+.d-header {
+  box-shadow: none;
+  background: transparent;
+  pointer-events: none;
+  .extra-info-wrapper,
+  .title {
+    display: none;
+  }
+  .panel {
+    pointer-events: all;
+    margin-top: 1.75em;
+  }
+  .wrap {
+    max-width: 1200px;
+  }
+}
+
+#topic-title {
+  position: sticky;
+  top: 0;
+  background: $secondary;
+  z-index: 999;
+  padding-top: 1.5em !important;
+  margin-right: 9em;
+  .title-wrapper {
+    width: 80%;
+  }
+  padding-bottom: 1em;
+}
+
+.tracked-categories {
+  top: 0 !important;
+  padding-top: 1em;
+}
+
+#sidebar-logo {
+  max-width: 100%;
+  margin-bottom: 2em;
+  img {
+    width: 100%;
+  }
+}
+
+.category-heading {
+  .category-logo {
+    display: none;
+  }
+  p {
+    display: none;
+  }
+}
+
+.navigation-categories,
+.tags-page:not(.tags-index),
+.navigation-topics {
+  .list-controls {
+    padding-right: 10em;
+  }
+}
+
+.list-controls {
+  padding-top: 2em;
+  position: sticky;
+  top: 0;
+  background: $secondary;
+  z-index: 999;
+}
+
+#main-outlet.wrap {
+  max-width: 1200px;
+}
+
+#main-outlet > .regular > span .topic-sidebar,
+#main-outlet > .banner > span .topic-sidebar {
+  top: 0em;
+}
+
+#main-outlet > .regular .container.posts > div:not(.selected-posts):not(.row),
+#main-outlet > .banner .container.posts > div:not(.selected-posts):not(.row) {
+  top: 6.75em;
 }
