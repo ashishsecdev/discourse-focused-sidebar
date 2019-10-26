@@ -3,103 +3,81 @@
   position: sticky;
 }
 
-#main > div {
-  display: grid;
-  max-width: 1110px;
-  margin: 0 auto;
-  grid-column-gap: 1em;
-  grid-template-areas:
-    "sidebar header"
-    "sidebar content";
-  grid-template-columns: auto 10fr;
-  grid-template-rows: 6em;
+@media screen and (min-width: 768px) {
+  #main > div {
+    display: grid;
+    max-width: 1110px;
+    margin: 0 auto;
+    grid-column-gap: 1em;
+    grid-template-areas:
+      "sidebar header"
+      "sidebar content";
+    grid-template-columns: auto 10fr;
+    grid-template-rows: 6em;
 
-  .shortcut-nav-outlet {
-    max-width: 180px;
-    grid-area: sidebar;
-    border-right: 1px solid $primary-low;
-    + div {
-      grid-area: header;
-      align-self: start;
-      @include sticky;
-      min-height: 0;
+    .shortcut-nav-outlet {
+      max-width: 180px;
+      grid-area: sidebar;
+      border-right: 1px solid $primary-low;
+      + div {
+        grid-area: header;
+        align-self: start;
+        @include sticky;
+        min-height: 0;
 
-      top: 0;
-      min-width: 0;
-      z-index: 999;
+        top: 0;
+        min-width: 0;
+        z-index: 999;
+      }
     }
-  }
-  #main-outlet {
-    grid-area: content;
-    padding-top: 0;
-    max-width: unset;
-    margin: 0;
-    align-self: start;
-  }
-}
-
-#topic-title {
-  display: none;
-}
-
-.post-stream {
-  .topic-post:first-of-type {
-    .topic-body,
-    .topic-avatar {
-      border-top: none;
+    #main-outlet {
+      grid-area: content;
       padding-top: 0;
+      max-width: unset;
+      margin: 0;
+      align-self: start;
     }
   }
-}
 
-.tracked-categories {
-  @include sticky;
-  padding: 0.25em 1.5em 0.25em 1em;
-  top: 0;
-}
+  #topic-title {
+    display: none;
+  }
 
-.docked .d-header,
-.d-header {
-  position: relative !important;
-  box-shadow: none;
-  border-bottom: 1px solid $primary-low;
-  .title {
-    > a img {
-      display: none;
-    }
-    .custom-header-title {
-      display: flex;
-      align-items: center;
-      h2 {
-        margin: 0;
+  .post-stream {
+    .topic-post:first-of-type {
+      .topic-body,
+      .topic-avatar {
+        border-top: none;
+        padding-top: 0;
       }
     }
   }
-}
 
-.shortcut-nav {
-  display: none;
-  margin-bottom: 1em;
-  .title {
-    padding-top: 0.25em;
-    margin-bottom: 2em;
-    .custom-header-title {
-      display: none;
-    }
-    img {
-      width: 100%;
+  .tracked-categories {
+    @include sticky;
+    padding: 0.25em 1.5em 0.25em 1em;
+    top: 0;
+  }
+
+  .docked .d-header,
+  .d-header {
+    position: relative !important;
+    box-shadow: none;
+    border-bottom: 1px solid $primary-low;
+    .title {
+      > a img {
+        display: none;
+      }
+      .custom-header-title {
+        display: flex;
+        align-items: center;
+        h2 {
+          margin: 0;
+        }
+      }
     }
   }
-}
 
-.navigation-container {
-  > div {
-    margin-left: auto;
-  }
-}
-
-// Only applying to main topic lists over 768px wide
-@media screen and (min-width: 768px) {
   ol.category-breadcrumb {
     display: none;
   }
@@ -109,23 +87,20 @@
   .shortcut-nav {
     width: 100%;
     display: block;
+    margin-bottom: 1em;
+    .title {
+      padding-top: 0.25em;
+      margin-bottom: 2em;
+      .custom-header-title {
+        display: none;
+      }
+      img {
+        width: 100%;
+      }
+    }
 
     .badge.new-posts.badge-notification:first-of-type:not(:last-of-type) {
       display: none;
-    }
-  }
-
-  .custom-home-link,
-  .custom-home-link:visited {
-    display: block;
-    color: $primary-high;
-    margin-bottom: 1.25em;
-    text-transform: capitalize;
-    border-top: 1px solid $primary-low;
-    padding-top: 1.5em;
-    font-size: 0.875em;
-    .d-icon {
-      color: $primary-medium;
     }
   }
 
@@ -225,75 +200,7 @@
   }
 }
 
-.topic-list {
-  .posters {
-    width: 60px;
-    a:not(:first-of-type):not(:last-of-type) {
-      display: none;
-    }
-  }
-  .views {
-    display: none;
-  }
-  td.main-link {
-    padding-right: 2em;
-  }
-}
-
-// Category headers
-
-h2.custom-page-title {
-  margin-bottom: 0.5em;
-}
-
-h3.custom-page-parent-title {
-  font-size: 0.875em;
-  font-weight: normal;
-  margin-bottom: 0;
-  a {
-    color: $primary-high;
-  }
-  .d-icon {
-    color: $primary-medium;
-    font-size: 0.875em;
-    margin-right: 0.25em;
-  }
-}
-
-// tags
-
-.tags-page:not(.tags-index) {
-  .list-controls {
-    .navigation-container {
-      display: flex;
-    }
-  }
-}
-
 // Category nav
-
-body.categories-list {
-  .navigation-container {
-    display: flex;
-  }
-}
-
-body:not(.tags-index) {
-  .list-controls .container {
-    display: flex;
-    .navigation-container {
-      width: 100%;
-    }
-    h2 {
-      margin-right: auto;
-      white-space: nowrap;
-    }
-  }
-}
-
-.list-controls .nav {
-  margin-bottom: 2em;
-}
 
 .navigation-container {
   .nav-pills > li > a {
@@ -348,7 +255,23 @@ li[title="all topics grouped by category"] {
 }
 
 // Topic list
+
 @media screen and (min-width: 768px) {
+  .topic-list {
+    .posters {
+      width: 60px;
+      a:not(:first-of-type):not(:last-of-type) {
+        display: none;
+      }
+    }
+    .views {
+      display: none;
+    }
+    td.main-link {
+      padding-right: 2em;
+    }
+  }
+
   #main-outlet > .regular,
   #main-outlet > .banner {
     #topic {

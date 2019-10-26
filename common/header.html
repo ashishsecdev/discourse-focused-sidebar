@@ -12,12 +12,3 @@
      }
    });
 </script>
-
-<script type="text/discourse-plugin" version="0.8">
-   api.modifyClass('component:discourse-topic', {
-     didInsertElement: function() {
-       this._super();
-       this.set("dockAt", -100); // that's my secret cap, I'm always docked
-     }
-  });
-</script>
