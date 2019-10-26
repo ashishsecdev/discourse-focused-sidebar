@@ -3,6 +3,12 @@
   position: sticky;
 }
 
+@media screen and (max-width: 767px) {
+  .shortcut-nav-outlet {
+    display: none;
+  }
+}
+
 @media screen and (min-width: 768px) {
   #main > div {
     display: grid;
