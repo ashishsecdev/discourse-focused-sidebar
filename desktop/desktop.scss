@@ -50,6 +50,8 @@
   }
 
   .post-stream {
+    padding-left: 3px;
+    // Makes room for j/k highlight
     .topic-post:first-of-type {
       .topic-body,
       .topic-avatar {
