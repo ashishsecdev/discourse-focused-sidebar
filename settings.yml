@@ -2,3 +2,8 @@ svg_icons:
   default: "level-up-alt"
   type: "list"
   list_type: "compact"
+
+show_unassigned_filter:
+  default: "todo|dev"
+  type: "list"
+  list_type: "compact"

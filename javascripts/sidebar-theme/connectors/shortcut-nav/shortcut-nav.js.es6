@@ -48,6 +48,34 @@ export default {
       filterMode
     });
 
+    var showUnassigned = settings.show_unassigned_filter.split("|");
+
+    function arrayContains(array, match) {
+      if (array.indexOf(match) > -1) {
+        return true;
+      }
+    }
+
+    I18n.translations.en.js.filters.unassigned = {
+      title: "Unassigned",
+      help: "Topics that are not assigned"
+    };
+
+    Discourse.NavItem.reopenClass({
+      buildList: function(category, args) {
+        var list = this._super(category, args);
+        if (category && arrayContains(showUnassigned, category.slug)) {
+          list.push(
+            Discourse.ExternalNavItem.create({
+              href: "?status=open&assigned=nobody",
+              name: "unassigned"
+            })
+          );
+        }
+        return list;
+      }
+    });
+
     withPluginApi("0.1", api => {
       api.onPageChange((url, title) => {
         if (component.isDestroying && component.isDestroyed) {
