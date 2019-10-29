@@ -356,16 +356,13 @@ li[title="all topics grouped by category"] {
     overflow-x: hidden;
   }
 
-  .topic-list-item a.title:not(.badge-notification),
-  .latest-topic-list-item a.title:not(.badge-notification),
-  .category-topic-link a.title:not(.badge-notification) {
-    font-weight: bold;
-  }
-
   .topic-list-item.visited a.title:not(.badge-notification),
   .latest-topic-list-item.visited a.title:not(.badge-notification),
   .category-topic-link.visited a.title:not(.badge-notification) {
-    font-weight: normal;
-    color: $primary;
+    color: $primary-high;
+  }
+
+  tr.visited {
+    background: $primary-very-low;
   }
 }
