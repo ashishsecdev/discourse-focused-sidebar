@@ -352,6 +352,7 @@ li[title="all topics grouped by category"] {
   }
 
   .custom-tracking-nav {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
