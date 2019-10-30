@@ -367,33 +367,41 @@ li[title="all topics grouped by category"] {
   }
 }
 
-// Hide all user profile nav by default
-// this avoids some CSS loading jank when clicking assigned in the sidebar
+@media screen and (min-width: 768px) {
+  // Hide all user profile nav by default
+  // this avoids some CSS loading jank when clicking assigned in the sidebar
 
-.user-primary-navigation,
-.user-secondary-navigation,
-.user-additional-controls,
-.about {
-  display: none;
-}
-
-.user-content-wrapper .user-additional-controls + .user-content,
-.user-content-wrapper .user-secondary-navigation + .user-content {
-  grid-column-start: 1;
-}
-
-// Re-show nav when needed
-
-body.show-nav {
   .user-primary-navigation,
   .user-secondary-navigation,
   .user-additional-controls,
   .about {
-    display: inherit;
+    display: none;
   }
 
   .user-content-wrapper .user-additional-controls + .user-content,
   .user-content-wrapper .user-secondary-navigation + .user-content {
-    grid-column-start: 2;
+    grid-column-start: 1;
+  }
+
+  // Re-show nav when needed
+
+  body.show-nav {
+    .user-primary-navigation,
+    .user-secondary-navigation,
+    .user-additional-controls,
+    .about {
+      display: inherit;
+    }
+
+    .user-content-wrapper .user-additional-controls + .user-content,
+    .user-content-wrapper .user-secondary-navigation + .user-content {
+      grid-column-start: 2;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .fixed-modal {
+    left: 0;
   }
 }
