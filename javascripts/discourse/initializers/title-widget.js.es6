@@ -15,7 +15,17 @@ export default {
 
           var cleanPath = window.location.pathname.replace(/\//g, "");
 
-          if (/^\/c\//.test(path)) {
+          var topMenuRoutes = Discourse.SiteSettings.top_menu
+            .split("|")
+            .map(function(route) {
+              return route;
+            });
+
+          var homeRoute = topMenuRoutes[0];
+
+          if (/\/$/.test(path) || /^\/\?/.test(path)) {
+            return h("div.custom-header-title", [h("h2", homeRoute)]);
+          } else if (/^\/c\//.test(path)) {
             const controller = container.lookup(
               "controller:navigation/category"
             );
