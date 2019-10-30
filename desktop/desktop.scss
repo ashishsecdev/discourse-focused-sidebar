@@ -316,6 +316,10 @@ li[title="all topics grouped by category"] {
           position: relative;
           margin: 0 !important;
           top: 0 !important;
+          .popup-menu {
+            left: unset !important;
+            right: 0 !important;
+          }
         }
         .timeline-container.timeline-docked {
           position: relative;
