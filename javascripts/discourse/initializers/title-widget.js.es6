@@ -22,12 +22,23 @@ export default {
             let category = controller.get("category");
             return h("div.custom-header-title", [h("h2", category.name)]);
           } else if (/^\/categories/.test(path)) {
-            return h("div.custom-header-title", [h("h2", "Categories")]);
+            return h("div.custom-header-title", [h("h2", "categories")]);
           } else if (/^\/tags\//.test(path)) {
             const controller = container.lookup("controller:tags");
             let tag = controller.get("target.currentRoute.params.tag_id");
             return h("div.custom-header-title", [h("h2", tag)]);
-          } else if (/^\/u\//.test(path) || /^\/t\//.test(path)) {
+          } else if (/\/activity\/assigned/.test(path)) {
+            return h("div.custom-header-title", [h("h2", "assigned")]);
+          } else if (/\/g$/.test(path)) {
+            return h("div.custom-header-title", [h("h2", "groups")]);
+          } else if (/^\/u$/.test(path)) {
+            return h("div.custom-header-title", [h("h2", "users")]);
+          } else if (
+            /^\/u\//.test(path) ||
+            /^\/t\//.test(path) ||
+            /^\/g\//.test(path) ||
+            /^\/badges\//.test(path)
+          ) {
             return;
           } else if (/^\/admin/.test(path)) {
             return h("div.custom-header-title", [h("h2", "Admin")]);

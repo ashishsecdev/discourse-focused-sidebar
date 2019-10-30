@@ -81,6 +81,7 @@ export default {
         if (component.isDestroying && component.isDestroyed) {
           return false;
         }
+        const path = window.location.pathname;
 
         let trackedCats = [];
         let currentUser = Discourse.User.current();
@@ -95,6 +96,13 @@ export default {
           }
         });
         component.set("trackedCats", trackedCats);
+
+        // This is for hiding the nav on the user assign page without loading jank
+        if (/\/u\//.test(path) && !/\/activity\/assigned/.test(path)) {
+          document.querySelector("body").classList.add("show-nav");
+        } else {
+          document.querySelector("body").classList.remove("show-nav");
+        }
 
         $(function() {
           // Get tracked tags
