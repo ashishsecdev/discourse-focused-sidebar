@@ -15,18 +15,32 @@
           <ul>
             {{#each trackedCats as |c|}}
               <li class={{c.slug}}>
-
-                {{#if c.newTopics}}
-                  <a href="/c/{{c.slug}}/l/new">{{category-link c}}
-                    <span class='badge new-posts badge-notification' title='{{i18n 'topic.new_topics' count=c.newTopics}}'>{{i18n 'filters.new.lower_title_with_count' count=c.newTopics}}</span>
-                  </a>
-                {{else if c.unreadTopics}}
-                  <a href="/c/{{c.slug}}/l/unread">{{category-link c}}
-                    <span class='badge unread-posts badge-notification' title='{{i18n 'topic.unread_topics' count=c.unreadTopics}}'>{{i18n 'filters.unread.lower_title_with_count' count=c.unreadTopics}}</span>
-                  </a>
-                {{else }}
-                  <a href="/c/{{c.slug}}">{{category-link c}}</a>
+                {{#if c.parentCategory}}
+                  {{#if c.newTopics}}
+                    <a href="/c/{{c.parentCategory.slug}}/{{c.slug}}/l/new">{{category-link c}}
+                      <span class='badge new-posts badge-notification' title='{{i18n 'topic.new_topics' count=c.newTopics}}'>{{i18n 'filters.new.lower_title_with_count' count=c.newTopics}}</span>
+                    </a>
+                  {{else if c.unreadTopics}}
+                    <a href="/c/{{c.parentCategory.slug}}/{{c.slug}}/l/unread">{{category-link c}}
+                      <span class='badge unread-posts badge-notification' title='{{i18n 'topic.unread_topics' count=c.unreadTopics}}'>{{i18n 'filters.unread.lower_title_with_count' count=c.unreadTopics}}</span>
+                    </a>
+                  {{else }}
+                    <a href="/c/{{c.parentCategory.slug}}/{{c.slug}}">{{category-link c}}</a>
+                  {{/if}}
+                {{else}}
+                  {{#if c.newTopics}}
+                    <a href="/c/{{c.slug}}/l/new">{{category-link c}}
+                      <span class='badge new-posts badge-notification' title='{{i18n 'topic.new_topics' count=c.newTopics}}'>{{i18n 'filters.new.lower_title_with_count' count=c.newTopics}}</span>
+                    </a>
+                  {{else if c.unreadTopics}}
+                    <a href="/c/{{c.slug}}/l/unread">{{category-link c}}
+                      <span class='badge unread-posts badge-notification' title='{{i18n 'topic.unread_topics' count=c.unreadTopics}}'>{{i18n 'filters.unread.lower_title_with_count' count=c.unreadTopics}}</span>
+                    </a>
+                  {{else }}
+                    <a href="/c/{{c.slug}}">{{category-link c}}</a>
+                  {{/if}}
                 {{/if}}
+
 
               </li>
             {{/each}}
