@@ -166,6 +166,28 @@
         align-items: baseline;
         color: $primary-high;
         width: 100%;
+        box-sizing: border-box;
+        .badge-wrapper {
+          pointer-events: none;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          flex: 0 1 auto;
+        }
+        .badge-notification {
+          flex: 0 0 auto;
+        }
+        a {
+          box-sizing: border-box;
+        }
+
+        .badge-notification.new-posts,
+        .badge-notification.unread-posts {
+          padding: 0;
+          background: transparent;
+          border-radius: 0;
+          color: $tertiary-high;
+        }
       }
       .unread-new {
         margin-left: auto;
