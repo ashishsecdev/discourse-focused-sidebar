@@ -184,6 +184,7 @@
         .badge-notification.new-posts,
         .badge-notification.unread-posts {
           padding: 0;
+          margin-left: auto;
           background: transparent;
           border-radius: 0;
           color: $tertiary-high;
