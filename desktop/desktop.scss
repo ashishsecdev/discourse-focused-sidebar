@@ -160,6 +160,16 @@
       &:hover {
         background: $tertiary-low;
       }
+
+      &.active {
+        .badge-wrapper {
+          font-weight: bold;
+          .badge-category {
+            color: $primary;
+          }
+        }
+      }
+
       > a {
         padding: 0.35em;
         display: flex;
