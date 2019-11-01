@@ -74,40 +74,26 @@ export default {
           filterMode
         });
 
+        let currentCategory;
+
         if (/^\/c\//.test(path)) {
-          let category;
           const controller = container.lookup("controller:navigation/category");
-          category = controller.get("category");
-
-          var observer = new MutationObserver(function() {
-            document
-              .querySelectorAll(".custom-category-list li")
-              .forEach(c => c.classList.remove("active"));
-
-            document
-              .querySelector(".custom-category-list" + " ." + category.slug)
-              .classList.add("active");
-
-            observer.disconnect();
-          });
-
-          var observerConfig = {
-            attributes: true
-          };
-
-          var targetNode = document.querySelector("body");
-
-          observer.observe(targetNode, observerConfig);
-        } else {
-          document
-            .querySelectorAll(".custom-category-list li")
-            .forEach(c => c.classList.remove("active"));
+          currentCategory = controller.get("category");
         }
 
         Discourse.Site._current.categories.forEach(function(category) {
           // Get tracked categories
+
           if (category.notification_level > 1) {
-            trackedCats.push(category);
+            if (currentCategory) {
+              if (category.slug === currentCategory.slug) {
+                trackedCats.push([category, true]);
+              } else {
+                trackedCats.push([category, false]);
+              }
+            } else {
+              trackedCats.push([category, false]);
+            }
           }
         });
         component.set("trackedCats", trackedCats);
@@ -121,7 +107,14 @@ export default {
 
         $(function() {
           // Get tracked tags
+
           let trackedTags = [];
+          let currentTag;
+
+          if (/^\/tags\//.test(path)) {
+            const controller = container.lookup("controller:tags");
+            currentTag = controller.get("target.currentRoute.params.tag_id");
+          }
 
           ajax("/u/" + username + ".json").then(function(result) {
             const tagCombo = [].concat(
@@ -129,7 +122,11 @@ export default {
               result.user.tracked_tags
             );
             tagCombo.forEach(function(tag) {
-              trackedTags.push(tag);
+              if (tag === currentTag) {
+                trackedTags.push([tag, true]);
+              } else {
+                trackedTags.push([tag, false]);
+              }
             });
 
             component.set("trackedTags", trackedTags);

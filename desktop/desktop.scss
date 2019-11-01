@@ -221,6 +221,12 @@
     &.custom-tag-list {
       li {
         font-size: 0.875em;
+        &.active {
+          a {
+            font-weight: bold;
+            color: $primary;
+          }
+        }
       }
     }
     &.custom-assign-list {

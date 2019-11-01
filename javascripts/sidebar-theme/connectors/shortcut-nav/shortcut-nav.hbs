@@ -14,34 +14,15 @@
         {{#if trackedCats}}
           <ul>
             {{#each trackedCats as |c|}}
-              <li class={{c.slug}}>
-                {{#if c.parentCategory}}
-                  {{#if c.newTopics}}
-                    <a href="/c/{{c.parentCategory.slug}}/{{c.slug}}/l/new">{{category-link c}}
-                      <span class='badge new-posts badge-notification' title='{{i18n 'topic.new_topics' count=c.newTopics}}'>{{i18n 'filters.new.lower_title_with_count' count=c.newTopics}}</span>
-                    </a>
-                  {{else if c.unreadTopics}}
-                    <a href="/c/{{c.parentCategory.slug}}/{{c.slug}}/l/unread">{{category-link c}}
-                      <span class='badge unread-posts badge-notification' title='{{i18n 'topic.unread_topics' count=c.unreadTopics}}'>{{i18n 'filters.unread.lower_title_with_count' count=c.unreadTopics}}</span>
-                    </a>
-                  {{else }}
-                    <a href="/c/{{c.parentCategory.slug}}/{{c.slug}}">{{category-link c}}</a>
-                  {{/if}}
-                {{else}}
-                  {{#if c.newTopics}}
-                    <a href="/c/{{c.slug}}/l/new">{{category-link c}}
-                      <span class='badge new-posts badge-notification' title='{{i18n 'topic.new_topics' count=c.newTopics}}'>{{i18n 'filters.new.lower_title_with_count' count=c.newTopics}}</span>
-                    </a>
-                  {{else if c.unreadTopics}}
-                    <a href="/c/{{c.slug}}/l/unread">{{category-link c}}
-                      <span class='badge unread-posts badge-notification' title='{{i18n 'topic.unread_topics' count=c.unreadTopics}}'>{{i18n 'filters.unread.lower_title_with_count' count=c.unreadTopics}}</span>
-                    </a>
-                  {{else }}
-                    <a href="/c/{{c.slug}}">{{category-link c}}</a>
-                  {{/if}}
-                {{/if}}
-
-
+              <li class={{if c.[1] 'active'}} data-category-name="{{c.[0].slug}}">
+                  <a href="/c/{{if c.[0].parentCategory c.[0].parentCategory.slug}}{{if c.[0].parentCategory '/'}}{{c.[0].slug}}{{if c.[0].unreadTopics (if c.[0].newTopics '/l/new' '/l/unread') }}">
+                    {{category-link c.[0]}}
+                    {{#if c.[0].newTopics}}
+                      <span class='badge new-posts badge-notification' title='{{i18n 'topic.new_topics' count=c.[0].newTopics}}'>{{i18n 'filters.new.lower_title_with_count' count=c.[0].newTopics}}</span>
+                    {{else if c.[0].unreadTopics}}
+                        <span class='badge unread-posts badge-notification' title='{{i18n 'topic.unread_topics' count=c.[0].unreadTopics}}'>{{i18n 'filters.unread.lower_title_with_count' count=c.[0].unreadTopics}}</span>
+                    {{/if}}
+                  </a>
               </li>
             {{/each}}
           </ul>
@@ -60,7 +41,7 @@
           <h3><a class="all-link" href="/tags">Tags</a> <a href="/my/preferences/tags">{{d-icon "pencil"}}</a> </h3>
           <ul>
             {{#each trackedTags as |t|}}
-              <li class={{t}}><a href="/tags/{{t}}">{{t}}</a></li>
+                <li class={{if t.[1] 'active'}} data-tag-name={{t.[0]}}><a href="/tags/{{t.[0]}}">{{t.[0]}}</a></li>
             {{/each}}
           </ul>
         </div>
