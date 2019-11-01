@@ -5,7 +5,7 @@ const container = Discourse.__container__;
 
 export default {
   setupComponent(args, component) {
-    const filterMode = "sidebar";
+    let filterMode = "sidebar";
     const navItems = Discourse.NavItem.buildList(null, { filterMode });
 
     Discourse.ExternalNavItem = Discourse.NavItem.extend({
@@ -54,12 +54,25 @@ export default {
           return false;
         }
         const path = window.location.pathname;
+        var cleanPath = path.replace(/\//g, "");
 
         let trackedCats = [];
         let currentUser = Discourse.User.current();
         let username = currentUser.username;
 
         component.set("currentUser", currentUser);
+
+        // Setting active state for All Topics pages
+        if (/^bookmarks/.test(cleanPath)) {
+          var filterMode = "bookmarked";
+        } else if (/activityassigned/.test(cleanPath)) {
+          var filterMode = "assigned";
+        } else {
+          var filterMode = cleanPath;
+        }
+        this.setProperties({
+          filterMode
+        });
 
         Discourse.Site._current.categories.forEach(function(category) {
           // Get tracked categories
