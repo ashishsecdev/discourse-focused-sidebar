@@ -30,7 +30,20 @@ export default {
               "controller:navigation/category"
             );
             let category = controller.get("category");
-            return h("div.custom-header-title", [h("h2", category.name)]);
+            if (category.parentCategory) {
+              return h("div.custom-header-title", [
+                h("h3", [
+                  h(
+                    "a",
+                    { href: "/c/" + category.parentCategory.slug },
+                    category.parentCategory.name
+                  )
+                ]),
+                h("h2", category.name)
+              ]);
+            } else {
+              return h("div.custom-header-title", [h("h2", category.name)]);
+            }
           } else if (/^\/categories/.test(path)) {
             return h("div.custom-header-title", [h("h2", "categories")]);
           } else if (/^\/tags\//.test(path)) {
@@ -43,6 +56,8 @@ export default {
             return h("div.custom-header-title", [h("h2", "groups")]);
           } else if (/^\/u$/.test(path)) {
             return h("div.custom-header-title", [h("h2", "users")]);
+          } else if (/^\/top\/.*/.test(path)) {
+            return h("div.custom-header-title", [h("h2", "top")]);
           } else if (
             /^\/u\//.test(path) ||
             /^\/t\//.test(path) ||
