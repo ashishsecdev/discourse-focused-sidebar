@@ -41,6 +41,7 @@
       padding-top: 0;
       max-width: unset;
       margin: 0;
+      min-width: 0;
       align-self: start;
     }
   }
@@ -405,8 +406,9 @@ li[title="all topics grouped by category"] {
     .topic-post article > .row {
       display: grid;
       grid-template-areas: "avatar post";
-      grid-template-columns: auto 1fr;
-      min-width: 0;
+      grid-template-columns: auto minmax(0, 1fr); // needs a 0 min for Safari
+
+      zmin-width: 0;
       &:before {
         display: none;
       }
@@ -478,5 +480,14 @@ li[title="all topics grouped by category"] {
 @media screen and (min-width: 768px) {
   .fixed-modal {
     left: 0;
+  }
+
+  .query-results {
+    > div {
+      position: relative;
+      width: 100%;
+      overflow-x: scroll;
+      padding-bottom: 2em;
+    }
   }
 }
