@@ -1,7 +1,10 @@
-.shortcut-nav-outlet {
-  display: none;
+@media screen and (max-width: 700px) {
+  #main > div {
+    grid-column-gap: 0;
+  }
 }
 
-.custom-header-title {
+.docked .d-header .title .custom-header-title,
+.d-header .title .custom-header-title {
   display: none;
 }
