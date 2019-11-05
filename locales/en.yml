@@ -6,3 +6,6 @@ en:
   no_categories: "<a href='/my/preferences/categories'>Start tracking or watching categories</a> and they'll be listed here."
   sidebar_filters:
     bookmarks: "Bookmarked"
+  sidebar_categories:
+    open_title_with_count: "{{count}} open"
+    open_topics_description: "{{count}} open topics"

@@ -15,12 +15,16 @@
           <ul>
             {{#each trackedCats as |c|}}
               <li class={{if c.[1] 'active'}} data-category-name="{{c.[0].slug}}">
-                  <a href="/c/{{if c.[0].parentCategory c.[0].parentCategory.slug}}{{if c.[0].parentCategory '/'}}{{c.[0].slug}}{{if c.[0].unreadTopics (if c.[0].newTopics '/l/new' '/l/unread') }}">
+                <a href="{{c.[0].sidebarUrl}}">
                     {{category-link c.[0]}}
                     {{#if c.[0].newTopics}}
                       <span class='badge new-posts badge-notification' title='{{i18n 'topic.new_topics' count=c.[0].newTopics}}'>{{i18n 'filters.new.lower_title_with_count' count=c.[0].newTopics}}</span>
                     {{else if c.[0].unreadTopics}}
                         <span class='badge unread-posts badge-notification' title='{{i18n 'topic.unread_topics' count=c.[0].unreadTopics}}'>{{i18n 'filters.unread.lower_title_with_count' count=c.[0].unreadTopics}}</span>
+                    {{else if c.[0].open_count}}
+                      {{#if c.[0].enable_open_filter}}
+                        <span class='badge open-topics badge-notification' title='{{theme-i18n 'sidebar_categories.open_topics_description' count=c.[0].open_count}}'>{{theme-i18n 'sidebar_categories.open_title_with_count' count=c.[0].open_count}}</span>
+                      {{/if}}
                     {{/if}}
                   </a>
               </li>
