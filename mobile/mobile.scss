@@ -1,6 +1,7 @@
 @media screen and (max-width: 700px) {
   #main > div {
     grid-column-gap: 0;
+    display: inline;
   }
 }
 
