@@ -490,6 +490,10 @@ body.show-nav {
   }
 }
 
+.embedded-posts .reply .row {
+  display: flex;
+}
+
 @media screen and (max-width: 924px) {
   .topic-footer-main-buttons {
     padding-top: 2em;
