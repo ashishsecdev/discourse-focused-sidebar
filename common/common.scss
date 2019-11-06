@@ -67,10 +67,6 @@
   top: 0;
 }
 
-.extra-info-wrapper {
-  padding-left: 0;
-}
-
 .docked .d-header,
 .d-header {
   position: relative !important;
@@ -531,6 +527,6 @@ body.show-nav {
 
   #main-outlet > .regular .topic-post article > .row,
   #main-outlet > .banner .topic-post article > .row {
-    display: inline-block;
+    display: inline;
   }
 }

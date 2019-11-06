@@ -8,3 +8,38 @@
 .d-header .title .custom-header-title {
   display: none;
 }
+
+.shortcut-nav-outlet {
+  position: fixed;
+  transition: all 0.15s ease-in-out;
+  z-index: 999;
+  background: $secondary;
+  top: 0;
+  bottom: 0;
+  box-shadow: 0 200px 0 1000px rgba(0, 0, 0, 0);
+}
+
+.list-controls .nav-pills > li {
+  border: none;
+  margin-right: 0.5em;
+}
+
+#navigation-bar {
+  width: 100%;
+  order: 90;
+}
+
+.show-custom-sidebar {
+  .shortcut-nav-outlet {
+    height: 100vh;
+    width: 160px;
+    box-shadow: 0 200px 0 1000px rgba(0, 0, 0, 0.5);
+  }
+  #main > div #main-outlet {
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .d-header .title {
+    pointer-events: none;
+  }
+}
