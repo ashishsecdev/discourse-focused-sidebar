@@ -8,16 +8,48 @@ export default {
 
   initialize() {
     Category.reopen({
-      @computed("open_count", "unreadTopics", "newTopics", "enable_open_filter")
-      sidebarUrl(openCount, unreadTopics, newTopics, enableOpenFilter) {
-        let url = this.get("url");
-        if (newTopics && newTopics > 0) {
-          url = url + "/l/new";
-        } else if (unreadTopics && unreadTopics > 0) {
-          url = url + "/l/unread";
-        } else if (enableOpenFilter && openCount > 0) {
-          url = url + "?status=open";
+      @computed(
+        "open_count",
+        "unreadTopics",
+        "newTopics",
+        "enable_open_filter",
+        "prioritize_open_filter"
+      )
+      sidebarCountType(
+        openCount,
+        unreadTopics,
+        newTopics,
+        enableOpenFilter,
+        prioritizeOpenFilter
+      ) {
+        if (prioritizeOpenFilter && enableOpenFilter && openCount > 0) {
+          return "open";
         }
+        if (newTopics && newTopics > 0) {
+          return "new";
+        } else if (unreadTopics && unreadTopics > 0) {
+          return "unread";
+        } else if (enableOpenFilter && openCount > 0) {
+          return "open";
+        }
+      },
+
+      @computed("sidebarCountType", "url")
+      sidebarUrl(sidebarCountType, url) {
+        switch (sidebarCountType) {
+          case "new":
+            url = url + "/l/new";
+            break;
+          case "unread":
+            url = url + "/l/unread";
+            break;
+          case "open":
+            url = url + "?status=open";
+            break;
+          default:
+            break;
+        }
+
         return url;
       }
     });
