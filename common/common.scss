@@ -537,4 +537,9 @@ body.show-nav {
   .about {
     display: block;
   }
+
+  .user-content-wrapper .user-additional-controls + .user-content,
+  .user-content-wrapper .user-secondary-navigation + .user-content {
+    grid-column-start: 2;
+  }
 }
