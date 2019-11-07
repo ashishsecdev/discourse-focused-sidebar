@@ -71,15 +71,7 @@ export default {
             return h("div.custom-header-title", [h("h2", cleanPath)]);
           }
         }
-      }),
-        api.decorateWidget("custom-header-title:after", helper => {
-          helper.widget.appEvents.on("page:changed", () => {
-            helper.widget.scheduleRerender();
-          });
-        }),
-        api.decorateWidget("home-logo:after", helper => {
-          return helper.attach("custom-header-title");
-        });
+      });
     });
   }
 };

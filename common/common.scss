@@ -45,10 +45,6 @@
   }
 }
 
-#topic-title {
-  display: none;
-}
-
 .post-stream {
   padding-left: 3px;
   // Makes room for j/k highlight
@@ -361,7 +357,6 @@ li[title="all topics grouped by category"] {
 
   #topic-title {
     grid-area: title;
-    padding-top: 0;
   }
 
   .container.posts {

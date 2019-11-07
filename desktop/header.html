@@ -31,25 +31,12 @@
 </script>
 
 <script type="text/discourse-plugin" version="0.8">
-  /*
-       api.modifyClass('component:composer-body', {
-
-    movePanels(size) {
-      $("#main-outlet").css("padding-bottom", size ? size : "");
-
-      // signal the progress bar it should move!
-      this.appEvents.trigger("composer:resized");
-
-      // shorten sidebar based on composer + logo height
-
-      var logoHeight =
-        document.getElementById("sidebar-logo").offsetHeight + 20;
-      var composerHeight = document.getElementById("reply-control").offsetHeight;
-
-      document.querySelector("div.custom-tracking-nav").style.maxHeight =
-        "calc(100vh - " + (composerHeight + logoHeight) + "px)";
-    },
-      });
-
-      */
+  api.decorateWidget("custom-header-title:after", helper => {
+    helper.widget.appEvents.on("page:changed", () => {
+      helper.widget.scheduleRerender();
+    });
+  }),
+  api.decorateWidget("home-logo:after", helper => {
+    return helper.attach("custom-header-title");
+  });
 </script>
