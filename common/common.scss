@@ -529,3 +529,12 @@ body.show-nav {
     display: inline;
   }
 }
+
+.container.group {
+  .user-primary-navigation,
+  .user-secondary-navigation,
+  .user-additional-controls,
+  .about {
+    display: block;
+  }
+}
