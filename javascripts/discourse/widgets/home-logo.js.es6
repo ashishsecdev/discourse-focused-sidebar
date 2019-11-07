@@ -92,7 +92,13 @@ export default createWidget("home-logo", {
       });
     }
 
-    if (this.site.mobileView) {
+    if (!this.site.mobileView) {
+      return h(
+        "a",
+        { attributes: { href: this.href(), "data-auto-route": true } },
+        this.logo()
+      );
+    } else {
       return h(
         "div",
         this.attach("link", {
@@ -100,16 +106,20 @@ export default createWidget("home-logo", {
           action: "showMobileSidebar"
         })
       );
-    } else {
-      return h(
-        "a",
-        { attributes: { href: this.href(), "data-auto-route": true } },
-        this.logo()
-      );
     }
   },
 
   showMobileSidebar() {
     document.querySelector("body").classList.toggle("show-custom-sidebar");
+  },
+
+  click(e) {
+    if (wantsNewWindow(e)) {
+      return false;
+    }
+    e.preventDefault();
+
+    DiscourseURL.routeToTag($(e.target).closest("a")[0]);
+    return false;
   }
 });
