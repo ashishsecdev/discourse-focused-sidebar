@@ -1,14 +1,14 @@
 import { ajax } from "discourse/lib/ajax";
 import { withPluginApi } from "discourse/lib/plugin-api";
-
+import NavItem from "discourse/models/nav-item";
 const container = Discourse.__container__;
 
 export default {
   setupComponent(args, component) {
     let filterMode = "sidebar";
-    const navItems = Discourse.NavItem.buildList(null, { filterMode });
+    const navItems = NavItem.buildList(null, { filterMode });
 
-    Discourse.ExternalNavItem = Discourse.NavItem.extend({
+    Discourse.ExternalNavItem = NavItem.extend({
       href: function() {
         return this.get("href");
       }.property("href")
