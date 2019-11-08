@@ -1,5 +1,5 @@
 import Category from "discourse/models/category";
-import computed from "ember-addons/ember-computed-decorators";
+import discourseComputed from "discourse-common/utils/decorators";
 
 export default {
   name: "add-sidebar-url-to-category",
@@ -8,7 +8,7 @@ export default {
 
   initialize() {
     Category.reopen({
-      @computed(
+      @discourseComputed(
         "open_count",
         "unreadTopics",
         "newTopics",
@@ -34,7 +34,7 @@ export default {
         }
       },
 
-      @computed("sidebarCountType", "url")
+      @discourseComputed("sidebarCountType", "url")
       sidebarUrl(sidebarCountType, url) {
         switch (sidebarCountType) {
           case "new":

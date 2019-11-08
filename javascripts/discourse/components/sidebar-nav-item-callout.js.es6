@@ -1,11 +1,11 @@
 import Component from "@ember/component";
-import computed from "ember-addons/ember-computed-decorators";
+import discourseComputed from "discourse-common/utils/decorators";
 
 export default Component.extend({
   tagName: "span",
   classNameBindings: [":badge", ":badge-notification", "sidebarClassName"],
 
-  @computed("category.sidebarCountType")
+  @discourseComputed("category.sidebarCountType")
   sidebarClassName(sidebarCountType) {
     switch (sidebarCountType) {
       case "open":
@@ -22,12 +22,12 @@ export default Component.extend({
     }
   },
 
-  @computed("category.sidebarCountType")
+  @discourseComputed("category.sidebarCountType")
   isVisible(countType) {
     return !!countType;
   },
 
-  @computed(
+  @discourseComputed(
     "category.sidebarCountType",
     "category.unreadTopics",
     "category.open_count",
