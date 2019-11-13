@@ -5,6 +5,10 @@
   }
 }
 
+.shortcut-nav .title img {
+  display: none;
+}
+
 .shortcut-nav-outlet {
   position: fixed;
   transition: all 0.15s ease-in-out;
@@ -13,6 +17,14 @@
   top: 0;
   bottom: 0;
   box-shadow: 0 200px 0 1000px rgba(0, 0, 0, 0);
+  h3,
+  .badge-wrapper,
+  .custom-nav-list.custom-tag-list li {
+    font-size: $font-0;
+  }
+  .tracked-categories .nav-pills > li > a {
+    font-size: $font-up-2;
+  }
 }
 
 .list-controls .nav-pills > li {
@@ -28,8 +40,14 @@
 .show-custom-sidebar {
   .shortcut-nav-outlet {
     height: 100vh;
-    width: 160px;
+    width: 87vw;
+    margin-top: 2em;
+    max-width: 400px !important;
     box-shadow: 0 200px 0 1000px rgba(0, 0, 0, 0.5);
+    .custom-tracking-nav {
+      max-height: 85vh;
+      overflow-x: auto;
+    }
   }
   #main > div #main-outlet {
     pointer-events: none;
