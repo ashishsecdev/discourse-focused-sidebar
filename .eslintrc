@@ -11,6 +11,7 @@
     "sourceType": "module"
   },
   "globals": {
+    "themePrefix": true,
     "Ember": true,
     "jQuery": true,
     "$": true,
