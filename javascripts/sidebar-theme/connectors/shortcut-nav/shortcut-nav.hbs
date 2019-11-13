@@ -55,6 +55,11 @@
                 {{i18n 'user.messages.inbox'}}
               {{/link-to}}
             </li>
+            <li>
+              {{#link-to 'userPrivateMessages.sent' currentUser}}
+                {{i18n 'user.messages.sent'}}
+              {{/link-to}}
+            </li>
             {{#if showUserArchive}}
               <li>
                 {{#link-to 'userPrivateMessages.archive' currentUser class="archive"}}
@@ -62,11 +67,6 @@
                 {{/link-to}}
               </li>
             {{/if}}
-            <li>
-              {{#link-to 'userPrivateMessages.sent' currentUser}}
-                {{i18n 'user.messages.sent'}}
-              {{/link-to}}
-            </li>
 
             {{#each userGroups as |group|}}
               {{#if group.has_messages}}
