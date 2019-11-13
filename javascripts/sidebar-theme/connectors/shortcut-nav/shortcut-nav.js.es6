@@ -1,6 +1,7 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 import NavItem from "discourse/models/nav-item";
 import User from "discourse/models/user";
+import { set } from "@ember/object";
 
 const container = Discourse.__container__;
 
@@ -125,7 +126,7 @@ export default {
               showArchive =
                 showArchive &&
                 document.location.pathname.indexOf("group/" + group.name) > 0;
-              group.set("showArchive", showArchive);
+              set(group, "showArchive", showArchive);
             }
           });
         }
