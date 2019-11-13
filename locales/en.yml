@@ -3,6 +3,7 @@ en:
     all_topics: "All topics"
     categories: "Categories"
     tags: "Tags"
+    messages: "Messages"
   no_categories: "<a href='/my/preferences/categories'>Start tracking or watching categories</a> and they'll be listed here."
   sidebar_filters:
     bookmarks: "Bookmarked"

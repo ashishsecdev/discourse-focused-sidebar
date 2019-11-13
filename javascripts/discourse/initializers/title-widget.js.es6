@@ -1,5 +1,4 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
-import { queryRegistry } from "discourse/widgets/widget";
 import { h } from "virtual-dom";
 
 export default {
@@ -9,7 +8,7 @@ export default {
     withPluginApi("0.8", api => {
       api.createWidget("custom-header-title", {
         tagName: "span",
-        html(attrs, state) {
+        html() {
           const path = window.location.pathname;
           const container = Discourse.__container__;
 

@@ -192,6 +192,11 @@ ol.category-breadcrumb {
       }
     }
 
+    > a.active {
+      font-weight: bold;
+      color: $primary;
+    }
+
     > a {
       padding: 0.35em;
       display: flex;
@@ -241,7 +246,8 @@ ol.category-breadcrumb {
     background: $tertiary-low;
   }
 
-  &.custom-tag-list {
+  &.custom-tag-list,
+  &.personal-messages {
     li {
       font-size: 0.875em;
       &.active {
@@ -511,4 +517,28 @@ tr.visited {
   .user-content-wrapper .user-secondary-navigation + .user-content {
     grid-column-start: 2;
   }
+}
+
+body.user-messages-page .viewing-self {
+  .about,
+  .user-secondary-navigation ul,
+  .user-primary-navigation {
+    display: none;
+  }
+  .user-content-wrapper .user-content {
+    grid-column-start: 1 !important;
+  }
+
+  .user-secondary-navigation {
+    position: relative;
+    grid-column-start: 2 !important;
+    button {
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+.custom-nav-list.personal-messages li a.archive {
+  margin-left: 8px;
 }

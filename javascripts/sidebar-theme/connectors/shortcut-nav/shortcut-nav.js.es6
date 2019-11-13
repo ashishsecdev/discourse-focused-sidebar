@@ -1,6 +1,7 @@
-import { ajax } from "discourse/lib/ajax";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import NavItem from "discourse/models/nav-item";
+import User from "discourse/models/user";
+
 const container = Discourse.__container__;
 
 export default {
@@ -14,7 +15,7 @@ export default {
       }.property("href")
     });
 
-    if (Discourse.User.current()) {
+    if (User.current()) {
       I18n.translations.en.js.filters.bookmarked = {
         title: I18n.t(themePrefix("sidebar_filters.bookmarks")),
         help: I18n.t(themePrefix("sidebar_filters.bookmarks"))
@@ -27,10 +28,7 @@ export default {
       );
     }
 
-    if (
-      Discourse.Site._current.siteSettings.assign_enabled &&
-      Discourse.User.current()
-    ) {
+    if (Discourse.Site._current.siteSettings.assign_enabled && User.current()) {
       I18n.translations.en.js.filters.assigned = {
         title: "Assigned",
         help: "Topics assigned to you"
@@ -49,7 +47,7 @@ export default {
     });
 
     withPluginApi("0.1", api => {
-      api.onPageChange((url, title) => {
+      api.onPageChange(() => {
         if (component.isDestroying && component.isDestroyed) {
           return false;
         }
@@ -57,18 +55,17 @@ export default {
         var cleanPath = path.replace(/\//g, "");
 
         let trackedCats = [];
-        let currentUser = Discourse.User.current();
-        let username = currentUser.username;
+        let currentUser = User.current();
 
         component.set("currentUser", currentUser);
 
         // Setting active state for All Topics pages
         if (/^bookmarks/.test(cleanPath)) {
-          var filterMode = "bookmarked";
+          filterMode = "bookmarked";
         } else if (/activityassigned/.test(cleanPath)) {
-          var filterMode = "assigned";
+          filterMode = "assigned";
         } else {
-          var filterMode = cleanPath;
+          filterMode = cleanPath;
         }
         this.setProperties({
           filterMode
@@ -97,6 +94,41 @@ export default {
           }
         });
         component.set("trackedCats", trackedCats);
+        component.set("userGroups", currentUser.groups);
+
+        const router = api.container.lookup("router:main");
+        const route = router.currentRoute;
+        const isCurrentUserPath =
+          document.location.pathname.indexOf(
+            "/u/" + currentUser.username_lower
+          ) > -1;
+        if (
+          route &&
+          (route.name === "userPrivateMessages.index" ||
+            route.name === "userPrivateMessages.sent" ||
+            route.name === "userPrivateMessages.archive") &&
+          isCurrentUserPath
+        ) {
+          component.set("showUserArchive", true);
+        } else {
+          component.set("showUserArchive", false);
+        }
+
+        if (currentUser.groups) {
+          currentUser.groups.forEach(group => {
+            if (group.has_messages) {
+              let showArchive =
+                route &&
+                (route.name === "userPrivateMessages.group" ||
+                  route.name === "userPrivateMessages.groupArchive") &&
+                isCurrentUserPath;
+              showArchive =
+                showArchive &&
+                document.location.pathname.indexOf("group/" + group.name) > 0;
+              group.set("showArchive", showArchive);
+            }
+          });
+        }
 
         // This is for hiding the nav on the user assign page without loading jank
         if (/\/u\//.test(path) && !/\/activity\/assigned/.test(path)) {
@@ -105,52 +137,28 @@ export default {
           document.querySelector("body").classList.remove("show-nav");
         }
 
-        $(function() {
-          // Get tracked tags
+        // Get tracked tags
+        let trackedTags = [];
+        let currentTag;
 
-          let trackedTags = [];
-          let currentTag;
+        if (/^\/tags\//.test(path)) {
+          const controller = container.lookup("controller:tags");
+          currentTag = controller.get("target.currentRoute.params.tag_id");
+        }
 
-          if (/^\/tags\//.test(path)) {
-            const controller = container.lookup("controller:tags");
-            currentTag = controller.get("target.currentRoute.params.tag_id");
-          }
-
-          ajax("/u/" + username + ".json").then(function(result) {
-            const tagCombo = [].concat(
-              result.user.watched_tags,
-              result.user.tracked_tags
-            );
-            tagCombo.forEach(function(tag) {
-              if (tag === currentTag) {
-                trackedTags.push([tag, true]);
-              } else {
-                trackedTags.push([tag, false]);
-              }
-            });
-
-            component.set("trackedTags", trackedTags);
-          });
-        });
-        /*
-        $(function() {
-          // Get assigned topics
-
-          if (Discourse.Site._current.siteSettings.assign_enabled) {
-            let assignedTopics = [];
-
-            ajax("/topics/messages-assigned/" + username + ".json").then(
-              function(assigned) {
-                assigned.topic_list.topics.forEach(function(topic) {
-                  assignedTopics.push(topic);
-                });
-
-                component.set("assignedTopics", assignedTopics);
-              }
-            );
+        const tagCombo = [].concat(
+          currentUser.watched_tags,
+          currentUser.tracked_tags
+        );
+        tagCombo.forEach(function(tag) {
+          if (tag === currentTag) {
+            trackedTags.push([tag, true]);
+          } else {
+            trackedTags.push([tag, false]);
           }
         });
-        */
+
+        component.set("trackedTags", trackedTags);
       });
     });
   }
