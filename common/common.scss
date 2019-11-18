@@ -542,3 +542,20 @@ body.user-messages-page .viewing-self {
 .custom-nav-list.personal-messages li a.archive {
   margin-left: 8px;
 }
+
+.menu-panel .menu-links {
+  .unread-topics-link,
+  .latest-topics-link,
+  .top-topics-link,
+  .new-topics-link {
+    display: none;
+  }
+}
+
+.menu-panel .panel-body ul.category-links {
+  display: none;
+}
+
+.menu-panel hr.categories-separator {
+  display: none;
+}
