@@ -68,49 +68,11 @@ export default createWidget("home-logo", {
   },
 
   html() {
-    if (this.site.mobileView) {
-      // hide menu when clicked outside
-
-      document.addEventListener("click", function(event) {
-        if (
-          event.target.closest(".shortcut-nav-outlet") ||
-          event.target.closest(".d-header .title")
-        )
-          return;
-
-        document.querySelector("body").classList.remove("show-custom-sidebar");
-      });
-
-      // hide menu when link clicked
-
-      document.querySelectorAll(".show-custom-sidebar a").forEach(link => {
-        link.addEventListener("click", event => {
-          document
-            .querySelector("body")
-            .classList.remove("show-custom-sidebar");
-        });
-      });
-    }
-
-    if (!this.site.mobileView) {
-      return h(
-        "a",
-        { attributes: { href: this.href(), "data-auto-route": true } },
-        this.logo()
-      );
-    } else {
-      return h(
-        "div",
-        this.attach("link", {
-          contents: () => this.logo(),
-          action: "showMobileSidebar"
-        })
-      );
-    }
-  },
-
-  showMobileSidebar() {
-    document.querySelector("body").classList.toggle("show-custom-sidebar");
+    return h(
+      "a",
+      { attributes: { href: this.href(), "data-auto-route": true } },
+      this.logo()
+    );
   },
 
   click(e) {

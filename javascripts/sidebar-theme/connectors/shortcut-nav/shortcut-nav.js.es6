@@ -2,10 +2,59 @@ import { withPluginApi } from "discourse/lib/plugin-api";
 import NavItem from "discourse/models/nav-item";
 import User from "discourse/models/user";
 import { set } from "@ember/object";
+import { next } from "@ember/runloop";
+import header from "discourse/widgets/header";
 
 const container = Discourse.__container__;
 
+function hijackHamburger() {
+  document.addEventListener("click", function(event) {
+    if (
+      event.target.closest(".shortcut-nav-outlet") ||
+      event.target.closest(".d-header .title")
+    )
+      return;
+
+    document.querySelector("body").classList.remove("show-custom-sidebar");
+  });
+
+  // hide menu when link clicked
+
+  document.querySelectorAll(".show-custom-sidebar a").forEach(link => {
+    link.addEventListener("click", () => {
+      document.querySelector("body").classList.remove("show-custom-sidebar");
+    });
+  });
+
+  header.prototype.toggleHamburger = function() {
+    const sidebarVisibe = document
+      .querySelector("body")
+      .classList.contains("show-custom-sidebar");
+
+    if (sidebarVisibe || this.state.hamburgerVisible) {
+      if (sidebarVisibe) {
+        document.querySelector("body").classList.toggle("show-custom-sidebar");
+      }
+      this.state.hamburgerVisible = !this.state.hamburgerVisible;
+      this.toggleBodyScrolling(this.state.hamburgerVisible);
+    } else {
+      next(() =>
+        document.querySelector("body").classList.toggle("show-custom-sidebar")
+      );
+    }
+  };
+}
+
 export default {
+  actions: {
+    triggerHamburger() {
+      next(() => {
+        this.appEvents.trigger("header:keyboard-trigger", {
+          type: "hamburger"
+        });
+      });
+    }
+  },
   setupComponent(args, component) {
     let filterMode = "sidebar";
     const navItems = NavItem.buildList(null, { filterMode });
@@ -46,6 +95,10 @@ export default {
       navItems,
       filterMode
     });
+
+    if (this.site.mobileView) {
+      hijackHamburger();
+    }
 
     withPluginApi("0.1", api => {
       api.onPageChange(() => {
