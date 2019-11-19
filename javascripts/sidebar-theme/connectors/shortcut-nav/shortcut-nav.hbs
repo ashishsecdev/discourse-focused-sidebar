@@ -48,6 +48,9 @@
           {{#link-to 'userPrivateMessages.index' currentUser class="all-link"}}
             {{theme-i18n "sidebar_title.messages"}}
           {{/link-to}}
+          <a href {{action (route-action "composePrivateMessage")}}>
+            {{d-icon "envelope"}}
+          </a>
         </h3>
           <ul>
             <li>
