@@ -12,7 +12,7 @@
 .shortcut-nav-outlet {
   position: fixed;
   transition: all 0.15s ease-in-out;
-  z-index: 999;
+  z-index: 999999;
   background: $secondary;
   top: 0;
   bottom: 0;
@@ -42,7 +42,6 @@
   .shortcut-nav-outlet {
     height: 100vh;
     width: 87vw;
-    margin-top: 2em;
     max-width: 400px !important;
     box-shadow: 0 200px 0 1000px rgba(0, 0, 0, 0.5);
     .custom-tracking-nav {
