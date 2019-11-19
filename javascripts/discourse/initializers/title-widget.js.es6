@@ -6,57 +6,53 @@ export default {
 
   initialize() {
     withPluginApi("0.8", api => {
+      function buildHeaderTitle(text) {
+        return h("div.custom-header-title", [h("h2", text)]);
+      }
+
       api.createWidget("custom-header-title", {
         tagName: "span",
+
         html() {
           const path = window.location.pathname;
-          const container = Discourse.__container__;
-
-          var cleanPath = window.location.pathname.replace(/\//g, "");
-
-          var topMenuRoutes = Discourse.SiteSettings.top_menu
+          const cleanPath = window.location.pathname.replace(/\//g, "");
+          const topMenuRoutes = Discourse.SiteSettings.top_menu
             .split("|")
-            .map(function(route) {
-              return route;
-            });
-
-          var homeRoute = topMenuRoutes[0];
+            .filter(Boolean);
 
           if (/\/$/.test(path) || /^\/\?/.test(path)) {
-            return h("div.custom-header-title", [h("h2", homeRoute)]);
+            return buildHeaderTitle(topMenuRoutes[0]);
           } else if (/^\/c\//.test(path)) {
-            const controller = container.lookup(
-              "controller:navigation/category"
-            );
-            let category = controller.get("category");
+            const controller = api.container.lookup("controller:navigation/category");
+            const category = controller.category;
             if (category.parentCategory) {
               return h("div.custom-header-title", [
                 h("h3", [
                   h(
                     "a",
-                    { href: "/c/" + category.parentCategory.slug },
+                    { href: `/c/${category.parentCategory.slug}` },
                     category.parentCategory.name
                   )
                 ]),
                 h("h2", category.name)
               ]);
             } else {
-              return h("div.custom-header-title", [h("h2", category.name)]);
+              return buildHeaderTitle(category.name);
             }
           } else if (/^\/categories/.test(path)) {
-            return h("div.custom-header-title", [h("h2", "categories")]);
+            return buildHeaderTitle("categories");
           } else if (/^\/tags\//.test(path)) {
-            const controller = container.lookup("controller:tags");
-            let tag = controller.get("target.currentRoute.params.tag_id");
-            return h("div.custom-header-title", [h("h2", tag)]);
+            const controller = api.container.lookup("controller:tags");
+            let tag = controller.target.currentRoute.params.tag_id;
+            return buildHeaderTitle(tag);
           } else if (/\/activity\/assigned/.test(path)) {
-            return h("div.custom-header-title", [h("h2", "assigned")]);
+            return buildHeaderTitle("assigned");
           } else if (/\/g$/.test(path)) {
-            return h("div.custom-header-title", [h("h2", "groups")]);
+            return buildHeaderTitle("groups");
           } else if (/^\/u$/.test(path)) {
-            return h("div.custom-header-title", [h("h2", "users")]);
+            return buildHeaderTitle("users");
           } else if (/^\/top\/.*/.test(path)) {
-            return h("div.custom-header-title", [h("h2", "top")]);
+            return buildHeaderTitle("top");
           } else if (
             /^\/u\//.test(path) ||
             /^\/t\//.test(path) ||
@@ -65,9 +61,9 @@ export default {
           ) {
             return;
           } else if (/^\/admin/.test(path)) {
-            return h("div.custom-header-title", [h("h2", "Admin")]);
+            return buildHeaderTitle("Admin");
           } else {
-            return h("div.custom-header-title", [h("h2", cleanPath)]);
+            return buildHeaderTitle(cleanPath);
           }
         }
       });

@@ -1,8 +1,22 @@
 {{#each navItems as |navItem|}}
-  {{navigation-item content=navItem filterMode=filterMode category=category}}
+  {{navigation-item
+    content=navItem
+    filterMode=filterMode
+    category=category
+  }}
 {{/each}}
+
 {{custom-html name="extraNavItem" tagName="li"}}
+
 {{!- this is done to avoid DIV in the UL, originally {{plugin-outlet name="extra-nav-item"}}
-{{#each connectors as |c|}}
-{{plugin-connector connector=c class=c.classNames tagName="li" args=(hash category=category filterMode=filterMode)}}
+{{#each connectors as |connector|}}
+  {{plugin-connector
+    connector=connector
+    class=connector.classNames
+    tagName="li"
+    args=(hash
+      category=category
+      filterMode=filterMode
+    )
+  }}
 {{/each}}

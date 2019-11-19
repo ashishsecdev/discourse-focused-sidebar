@@ -4,45 +4,62 @@
   <div class="custom-tracking-nav">
     <div class="custom-nav-list custom-global-list">
       <h3>
-        <a class="all-link" href="/latest">{{theme-i18n "sidebar_title.all_topics"}}</a>
+        <a class="all-link" href="/latest">
+          {{theme-i18n "sidebar_title.all_topics"}}
+        </a>
         {{#if site.mobileView}}
-          <a {{action "triggerHamburger"}}>{{d-icon "cog"}}</a>
+          <a {{action "triggerHamburger"}}>
+            {{d-icon "cog"}}
+          </a>
         {{/if}}
       </h3>
-      {{navigation-bar navItems=navItems filterMode=filterMode category=category id="global-sidebar-nav"}}
+      {{navigation-bar
+        navItems=navItems
+        filterMode=filterMode
+        category=category
+        id="global-sidebar-nav"
+      }}
     </div>
 
     {{#if currentUser}}
       <div class="custom-nav-list custom-category-list">
-        <h3><a class="all-link" href="/categories">{{theme-i18n "sidebar_title.categories"}}</a> <a href="/my/preferences/categories">{{d-icon "pencil"}}</a> </h3>
+        <h3>
+          <a class="all-link" href="/categories">
+            {{theme-i18n "sidebar_title.categories"}}
+          </a>
+          <a href="/my/preferences/categories">
+            {{d-icon "pencil"}}
+          </a>
+        </h3>
 
         {{#if trackedCats}}
           <ul>
-            {{#each trackedCats as |c|}}
-              <li class={{if c.[1] 'active'}} data-category-name="{{c.[0].slug}}">
-                <a href="{{c.[0].sidebarUrl}}">
-                    {{category-link c.[0]}}
-                    {{sidebar-nav-item-callout category=c.[0]}}
-                  </a>
+            {{#each trackedCats as |trackedCat|}}
+              <li class={{if trackedCat.[1] 'active'}} data-category-name="{{trackedCat.[0].slug}}">
+                <a href="{{trackedCat.[0].sidebarUrl}}">
+                  {{category-link trackedCat.[0]}}
+                  {{sidebar-nav-item-callout category=trackedCat.[0]}}
+                </a>
               </li>
             {{/each}}
           </ul>
-        {{/if}}
-
-        {{#unless trackedCats}}
+        {{else}}
           <div class="custom-empty-message">
             <p>{{{theme-i18n "no_categories"}}}</p>
           </div>
-        {{/unless}}
-
+        {{/if}}
       </div>
 
       {{#if trackedTags}}
         <div class="custom-nav-list custom-tag-list">
           <h3><a class="all-link" href="/tags">{{theme-i18n "sidebar_title.tags"}}</a> <a href="/my/preferences/tags">{{d-icon "pencil"}}</a> </h3>
           <ul>
-            {{#each trackedTags as |t|}}
-                <li class={{if t.[1] 'active'}} data-tag-name={{t.[0]}}><a href="/tags/{{t.[0]}}">{{t.[0]}}</a></li>
+            {{#each trackedTags as |trackedTag|}}
+              <li class={{if trackedTag.[1] 'active'}} data-tag-name={{trackedTag.[0]}}>
+                <a href="/tags/{{trackedTag.[0]}}">
+                  {{trackedTag.[0]}}
+                </a>
+              </li>
             {{/each}}
           </ul>
         </div>

@@ -46,15 +46,6 @@ function hijackHamburger() {
 }
 
 export default {
-  actions: {
-    triggerHamburger() {
-      next(() => {
-        this.appEvents.trigger("header:keyboard-trigger", {
-          type: "hamburger"
-        });
-      });
-    }
-  },
   setupComponent(args, component) {
     let filterMode = "sidebar";
     const navItems = NavItem.buildList(null, { filterMode });
@@ -121,9 +112,7 @@ export default {
         } else {
           filterMode = cleanPath;
         }
-        this.setProperties({
-          filterMode
-        });
+        this.set("filterMode", filterMode);
 
         let currentCategory;
 
@@ -147,14 +136,17 @@ export default {
             }
           }
         });
-        component.set("trackedCats", trackedCats);
-        component.set("userGroups", currentUser.groups);
+
+        component.setProperties({
+          trackedCats,
+          userGroups: currentUser.groups
+        });
 
         const router = api.container.lookup("router:main");
         const route = router.currentRoute;
         const isCurrentUserPath =
           document.location.pathname.indexOf(
-            "/u/" + currentUser.username_lower
+            `/u/${currentUser.username_lower}`
           ) > -1;
         if (
           route &&
@@ -215,5 +207,15 @@ export default {
         component.set("trackedTags", trackedTags);
       });
     });
-  }
+  },
+
+  actions: {
+    triggerHamburger() {
+      next(() =>
+        this.appEvents.trigger("header:keyboard-trigger", {
+          type: "hamburger"
+        })
+      );
+    }
+  },
 };

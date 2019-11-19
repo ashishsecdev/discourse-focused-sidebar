@@ -52,6 +52,6 @@ export default Component.extend({
         return;
     }
 
-    return I18n.t(i18nKey, { count: count });
+    return I18n.t(i18nKey, { count });
   }
 });

@@ -38,15 +38,13 @@ export default {
       sidebarUrl(sidebarCountType, url) {
         switch (sidebarCountType) {
           case "new":
-            url = url + "/l/new";
+            url = `${url}/l/new`;
             break;
           case "unread":
-            url = url + "/l/unread";
+            url = `${url}/l/unread`;
             break;
           case "open":
-            url = url + "?status=open";
-            break;
-          default:
+            url = `${url}?status=open`;
             break;
         }
 

@@ -7,8 +7,10 @@ import DiscourseURL from "discourse/lib/url";
 export default createWidget("home-logo", {
   tagName: "div.title",
 
-  settings: {
-    href: Discourse.getURL("/")
+  init() {
+    this.settings = {
+      href: Discourse.getURL("/")
+    };
   },
 
   href() {

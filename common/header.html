@@ -1,6 +1,6 @@
 <script type="text/discourse-plugin" version="0.8">
   // differentiate tag index from other tags page, should do this in core
-  api.onPageChange((url, title) => {
+  api.onPageChange(url => {
      if (url == "/tags"){
        document
          .querySelector("body")
