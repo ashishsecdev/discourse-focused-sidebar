@@ -96,6 +96,13 @@ export default {
         if (component.isDestroying && component.isDestroyed) {
           return false;
         }
+
+        if (this.site.mobileView) {
+          document
+            .querySelector("body")
+            .classList.remove("show-custom-sidebar");
+        }
+
         const path = window.location.pathname;
         var cleanPath = path.replace(/\//g, "");
 
@@ -217,5 +224,5 @@ export default {
         })
       );
     }
-  },
+  }
 };
