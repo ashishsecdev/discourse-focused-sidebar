@@ -555,3 +555,14 @@ body.user-messages-page .viewing-self {
 .menu-panel hr.categories-separator {
   display: none;
 }
+
+// 404
+.not-found-container {
+  > .row {
+    grid-column-start: 1;
+  }
+}
+.page-not-found {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
