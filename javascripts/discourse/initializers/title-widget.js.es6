@@ -23,7 +23,9 @@ export default {
           if (/\/$/.test(path) || /^\/\?/.test(path)) {
             return buildHeaderTitle(topMenuRoutes[0]);
           } else if (/^\/c\//.test(path)) {
-            const controller = api.container.lookup("controller:navigation/category");
+            const controller = api.container.lookup(
+              "controller:navigation/category"
+            );
             const category = controller.category;
             if (category.parentCategory) {
               return h("div.custom-header-title", [
@@ -43,7 +45,12 @@ export default {
             return buildHeaderTitle("categories");
           } else if (/^\/tags\//.test(path)) {
             const controller = api.container.lookup("controller:tags");
-            let tag = controller.target.currentRoute.params.tag_id;
+            let tag;
+            if (controller.target.currentRoute === null) {
+              tag = "";
+            } else {
+              tag = controller.target.currentRoute.params.tag_id;
+            }
             return buildHeaderTitle(tag);
           } else if (/\/activity\/assigned/.test(path)) {
             return buildHeaderTitle("assigned");
