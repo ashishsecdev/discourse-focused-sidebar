@@ -97,6 +97,11 @@ export default {
           return false;
         }
 
+        if (!Discourse.Site._current.categories) {
+          // we could be default theme in a requires login site
+          return;
+        }
+
         if (this.site.mobileView) {
           document
             .querySelector("body")

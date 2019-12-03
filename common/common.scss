@@ -566,3 +566,10 @@ body.user-messages-page .viewing-self {
   grid-column-start: 1;
   grid-row-start: 1;
 }
+
+.static-login {
+  .shortcut-nav,
+  .d-header .title .custom-header-title {
+    display: none;
+  }
+}

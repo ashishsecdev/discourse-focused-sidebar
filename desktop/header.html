@@ -10,6 +10,10 @@
 <script>
   $(document).ready(function() {
     var logo = document.getElementById("site-logo");
+    if (!logo) {
+      // site could require login
+      return;
+    }
 
     function loaded() {
       var logoHeight =
