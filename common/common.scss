@@ -374,7 +374,6 @@ li[title="all topics grouped by category"] {
       grid-area: posts;
       max-width: 760px;
       min-width: 0;
-      overflow: hidden;
     }
     @media screen and (min-width: 925px) {
       > div:not(.selected-posts):not(.row) {
