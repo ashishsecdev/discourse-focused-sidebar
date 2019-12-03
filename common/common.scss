@@ -413,6 +413,7 @@ li[title="all topics grouped by category"] {
     }
     .topic-avatar {
       grid-area: avatar;
+      align-self: start;
     }
 
     .post-notice {
