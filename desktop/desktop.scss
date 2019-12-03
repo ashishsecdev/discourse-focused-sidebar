@@ -7,6 +7,16 @@
   padding-top: 0;
 }
 
+.topic-avatar .avatar-flair {
+  top: 45px;
+  bottom: unset;
+}
+
+#user-card,
+#group-card {
+  z-index: 1001; // Show cards above header
+}
+
 // Hide all user profile nav by default
 // this avoids some CSS loading jank when clicking assigned in the sidebar
 
