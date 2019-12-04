@@ -55,10 +55,10 @@
           <h3><a class="all-link" href="/tags">{{theme-i18n "sidebar_title.tags"}}</a> <a href="/my/preferences/tags">{{d-icon "pencil"}}</a> </h3>
           <ul>
             {{#each trackedTags as |trackedTag|}}
-              <li class={{if trackedTag.[1] 'active'}} data-tag-name={{trackedTag.[0]}}>
-                <a href="/tags/{{trackedTag.[0]}}">
-                  {{trackedTag.[0]}}
-                </a>
+              <li data-tag-name={{trackedTag}}>
+                {{#link-to 'tags.show' trackedTag}}
+                  {{trackedTag}}
+                {{/link-to}}
               </li>
             {{/each}}
           </ul>
@@ -108,6 +108,13 @@
                   </li>
                 {{/if}}
               {{/if}}
+            {{/each}}
+            {{#each pmTags as |tag|}}
+              <li>
+                {{#link-to 'userPrivateMessages.tagsShow' currentUser.username_lower tag}}
+                  {{tag}}
+                {{/link-to}}
+              </li>
             {{/each}}
           </ul>
       </div>

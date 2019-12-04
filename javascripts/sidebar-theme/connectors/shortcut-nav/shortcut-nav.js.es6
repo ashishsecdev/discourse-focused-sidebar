@@ -195,28 +195,24 @@ export default {
           document.querySelector("body").classList.remove("show-nav");
         }
 
-        // Get tracked tags
-        let trackedTags = [];
-        let currentTag;
+        let trackedTags = [],
+          pmTags = [];
 
-        if (/^\/tags\//.test(path)) {
-          const controller = container.lookup("controller:tags");
-          currentTag = controller.get("target.currentRoute.params.tag_id");
+        if (currentUser.user_tags && currentUser.user_tags.length > 0) {
+          currentUser.user_tags.forEach(tag => {
+            if (tag.pm_topic_count) {
+              pmTags.push(tag.name);
+              if (tag.topic_count > 0) {
+                trackedTags.push(tag.name);
+              }
+            } else {
+              trackedTags.push(tag.name);
+            }
+          });
         }
 
-        const tagCombo = [].concat(
-          currentUser.watched_tags,
-          currentUser.tracked_tags
-        );
-        tagCombo.forEach(function(tag) {
-          if (tag === currentTag) {
-            trackedTags.push([tag, true]);
-          } else {
-            trackedTags.push([tag, false]);
-          }
-        });
-
         component.set("trackedTags", trackedTags);
+        component.set("pmTags", pmTags);
       });
     });
   },
